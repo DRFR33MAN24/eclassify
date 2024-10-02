@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "778173365851",
+    "project_id": "classified-d928d",
+    "storage_bucket": "classified-d928d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778173365851:android:bc6123602c75a1f7b0497e",
+        "android_client_info": {
+          "package_name": "com.watanplatform.aldalil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "778173365851-9e1p9aiod6q4p8n00okf82ioj45gbp53.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.watanplatform.aldalil",
+            "certificate_hash": "988ac1a1cf2a583d7df037593ce428e7789d3c42"
+          }
+        },
+        {
+          "client_id": "778173365851-jraqe81j3n4bbembqlno8f0b8ulvlk2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmzpSc4cCgdDhNA_scnQY6t_NjfgC8dnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "778173365851-jraqe81j3n4bbembqlno8f0b8ulvlk2k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

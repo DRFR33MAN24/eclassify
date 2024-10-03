@@ -39,6 +39,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextStyle? hintTextStyle;
   final TextCapitalization? capitalization;
   final bool? isRequired;
+    final bool? enable;
 
   const CustomTextFormField({
     super.key,
@@ -64,11 +65,13 @@ class CustomTextFormField extends StatelessWidget {
     this.minLength,
     this.capitalization,
     this.isRequired,
+    this.enable,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        enabled: enable,
       controller: controller,
       inputFormatters: formaters,
       obscureText: obscureText ?? false,

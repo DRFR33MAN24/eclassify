@@ -68,6 +68,7 @@ class Api {
   static String updateProfileApi = "update-profile";
   static String getSliderApi = "get-slider";
   static String getCategoriesApi = "get-categories";
+  static String getServicesCategoriesApi = "get-services-categories";
   static String getItemApi = "get-item";
   static String getMyItemApi = "my-items";
   static String getNotificationListApi = "get-notification-list";
@@ -78,6 +79,7 @@ class Api {
   static String getPaymentSettingsApi = "get-payment-settings";
   static String getSystemSettingsApi = "get-system-settings";
   static String getFavoriteItemApi = "get-favourite-item";
+  static String getServiceFavoriteItemApi = "get-service-favourite-item";
   static String updateItemStatusApi = "update-item-status";
   static String getReportReasonsApi = "get-report-reasons";
   static String addReportsApi = "add-reports";
@@ -85,6 +87,16 @@ class Api {
   static String getFeaturedSectionApi = "get-featured-section";
   static String updateItemApi = "update-item";
   static String addItemApi = "add-item";
+  static String addServiceApi = "add-service";
+  static String getServiceApi = "get-service";
+  static String getMyServiceApi = "my-services";
+  static String updateServiceApi = "update-service";
+  static String deleteServiceApi = "delete-service";
+  static String updateServiceStatusApi = "update-service-status";
+  static String makeServiceFeaturedApi = "make-service-featured";
+  static String getServiceTotalClickApi = "get-service-total-click";
+  static String setServiceTotalClickApi = "set-service-total-click";
+  static String serviceOfferApi = "service-offer";
   static String deleteItemApi = "delete-item";
   static String setItemTotalClickApi = "set-item-total-click";
   static String makeItemFeaturedApi = "make-item-featured";

@@ -3,7 +3,7 @@ import 'package:eClassify/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/AppIcon.dart';
 import '../../../app/routes.dart';
-import '../home/home_screen.dart';
+import '../ItemHomeScreen/home_screen.dart';
 import '../widgets/AnimatedRoutes/blur_page_route.dart';
 
 class SellerIntroVerificationScreen extends StatefulWidget {

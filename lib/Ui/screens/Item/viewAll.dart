@@ -10,7 +10,7 @@ import '../../../app/routes.dart';
 import '../../../data/cubits/Home/fetch_section_items_cubit.dart';
 import '../../../data/helper/designs.dart';
 import '../../../data/model/item/item_model.dart';
-import '../home/Widgets/item_horizontal_card.dart';
+import '../ItemHomeScreen/Widgets/item_horizontal_card.dart';
 import '../widgets/AnimatedRoutes/blur_page_route.dart';
 import '../widgets/Errors/no_data_found.dart';
 import '../widgets/Errors/no_internet.dart';

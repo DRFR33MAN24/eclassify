@@ -11,7 +11,7 @@ final appThemeData = {
     brightness: Brightness.light,
     //textTheme
     useMaterial3: false,
-    fontFamily: "Manrope",
+    fontFamily: "Tajawal",
     textSelectionTheme: const TextSelectionThemeData(
       selectionColor: territoryColor_,
       cursorColor: territoryColor_,
@@ -32,7 +32,7 @@ final appThemeData = {
   AppTheme.dark: ThemeData(
     brightness: Brightness.dark,
     useMaterial3: false,
-    fontFamily: "Manrope",
+    fontFamily: "Tajawal",
     textSelectionTheme: const TextSelectionThemeData(
       selectionHandleColor: territoryColorDark,
       selectionColor: territoryColorDark,

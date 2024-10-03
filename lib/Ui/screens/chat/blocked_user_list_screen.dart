@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:eClassify/Ui/screens/home/home_screen.dart';
+import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
 import 'package:eClassify/utils/AppIcon.dart';
 import 'package:eClassify/data/cubits/chatCubits/blocked_users_list_cubit.dart';
 import 'package:eClassify/data/model/chat/chated_user_model.dart';

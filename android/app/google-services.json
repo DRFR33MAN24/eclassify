@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "778173365851",
-    "project_id": "classified-d928d",
-    "storage_bucket": "classified-d928d.appspot.com"
+    "project_number": "277896590779",
+    "project_id": "aldalil-3d0d1",
+    "storage_bucket": "aldalil-3d0d1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:778173365851:android:bc6123602c75a1f7b0497e",
+        "mobilesdk_app_id": "1:277896590779:android:a6c55c959a0ae1ce2fc09e",
         "android_client_info": {
           "package_name": "com.watanplatform.aldalil"
         }
       },
       "oauth_client": [
         {
-          "client_id": "778173365851-9e1p9aiod6q4p8n00okf82ioj45gbp53.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.watanplatform.aldalil",
-            "certificate_hash": "988ac1a1cf2a583d7df037593ce428e7789d3c42"
-          }
-        },
-        {
-          "client_id": "778173365851-jraqe81j3n4bbembqlno8f0b8ulvlk2k.apps.googleusercontent.com",
+          "client_id": "277896590779-bh6rthibivk4nqf1i07mah9dlt39h80g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDmzpSc4cCgdDhNA_scnQY6t_NjfgC8dnQ"
+          "current_key": "AIzaSyALm7KU791wh3BbWeMazWSN9VWI9Fsfgvs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "778173365851-jraqe81j3n4bbembqlno8f0b8ulvlk2k.apps.googleusercontent.com",
+              "client_id": "277896590779-bh6rthibivk4nqf1i07mah9dlt39h80g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:eClassify/Ui/screens/home/home_screen.dart';
+import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 

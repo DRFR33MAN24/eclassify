@@ -14,7 +14,7 @@ import '../../../data/model/item/item_model.dart';
 import '../../../utils/Extensions/extensions.dart';
 import '../../../utils/ui_utils.dart';
 
-import '../home/Widgets/item_horizontal_card.dart';
+import '../ItemHomeScreen/Widgets/item_horizontal_card.dart';
 import '../widgets/intertitial_ads_screen.dart';
 import '../widgets/shimmerLoadingContainer.dart';
 import '../widgets/AnimatedRoutes/blur_page_route.dart';

@@ -1,5 +1,7 @@
-import 'package:eClassify/Ui/screens/Item/my_item_tab_screen.dart';
-import 'package:eClassify/data/cubits/item/fetch_my_item_cubit.dart';
+import 'package:eClassify/Ui/screens/Item/my_item_tab_screen.dart' as item;
+import 'package:eClassify/Ui/screens/Service/my_item_tab_screen.dart' as service;
+import 'package:eClassify/data/cubits/item/fetch_my_item_cubit.dart' as item;
+import 'package:eClassify/data/cubits/service/fetch_my_item_cubit.dart' as service;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,8 +25,10 @@ class ItemsScreen extends StatefulWidget {
 class MyItemState extends State<ItemsScreen> with TickerProviderStateMixin {
   int offset = 0, total = 0;
   int selectTab = 0;
+   int selectType = 0;
   final PageController _pageController = PageController();
   List<Map> sections = [];
+  List<Map> types = [];
 
   @override
   void initState() {
@@ -33,6 +37,17 @@ class MyItemState extends State<ItemsScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+
+      types = [
+      {
+        "title": "item".translate(context),
+        "status": "item",
+      },
+      {
+        "title": "service".translate(context),
+        "status": "service",
+      },
+    ];
     sections = [
       {
         "title": "allAds".translate(context),
@@ -68,9 +83,39 @@ class MyItemState extends State<ItemsScreen> with TickerProviderStateMixin {
           context,
           title: "myAds".translate(context),
           // bottomHeight: 49,
-          bottomHeight: 49,
+          bottomHeight: 100,
 
           bottom: [
+              SizedBox(
+              width: context.screenWidth,
+              height: 45,
+              child: ListView.separated(
+                shrinkWrap: true,
+                padding: const EdgeInsetsDirectional.fromSTEB(18, 5, 18, 2),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  Map type = types[index];
+                  return customTab(
+                    context,
+                    isSelected: (selectType == index),
+                    onTap: () {
+                      selectType = index;
+                      //itemScreenCurrentPage = index;
+                      setState(() {});
+                    
+                    },
+                    name: type['title'],
+                    onDoubleTap: () {},
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    width: 8,
+                  );
+                },
+                itemCount: types.length,
+              ),
+            ),
             SizedBox(
               width: context.screenWidth,
               height: 45,
@@ -116,16 +161,31 @@ class MyItemState extends State<ItemsScreen> with TickerProviderStateMixin {
             children: List.generate(sections.length, (index) {
               Map section = sections[index];
 
-              ///Here we pass both but logic will be in the cubit
+        if(selectType==0){
               return BlocProvider(
-                create: (context) => FetchMyItemsCubit(),
+                create: (context) => item.FetchMyItemsCubit(),
                 child: Builder(builder: (context) {
-                  return MyItemTab(
+              
+                    return item.MyItemTab(
                     //getActiveItems: section['active'],
                     getItemsWithStatus: section['status'],
                   );
+               
                 }),
+                );
+            }
+            else {  
+              return BlocProvider(
+                create: (context) => service.FetchMyItemsCubit(),
+                child: Builder(builder: (context) {
+              
+                    return service.MyItemTab(
+                    //getActiveItems: section['active'],
+                    getItemsWithStatus: section['status'],
+                  );
+            }),
               );
+            }
             }),
           ),
         ),

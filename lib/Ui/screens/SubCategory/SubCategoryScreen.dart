@@ -1,4 +1,4 @@
-import 'package:eClassify/data/cubits/category/fetch_sub_categories_cubit.dart';
+import 'package:eClassify/data/cubits/category/items/fetch_sub_categories_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';

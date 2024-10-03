@@ -14,7 +14,7 @@ import '../../../data/cubits/seller/fetch_verification_request_cubit.dart';
 import '../../../data/cubits/seller/send_verification_field_cubit.dart';
 import '../../../data/helper/widgets.dart';
 import '../../../data/model/verification_request_model.dart';
-import '../home/home_screen.dart';
+import '../ItemHomeScreen/home_screen.dart';
 import '../Item/add_item_screen/CustomFiledStructure/custom_field.dart';
 import '../widgets/AnimatedRoutes/blur_page_route.dart';
 import '../widgets/DynamicField/dynamic_field.dart';

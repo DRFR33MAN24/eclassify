@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:eClassify/Ui/screens/home/home_screen.dart';
+import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
 import 'package:eClassify/data/cubits/Location/fetch_countries_cubit.dart';
 import 'package:eClassify/data/model/Location/countriesModel.dart';
 import 'package:eClassify/utils/hive_utils.dart';

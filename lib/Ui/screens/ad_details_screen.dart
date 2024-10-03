@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
-import 'package:eClassify/Ui/screens/home/home_screen.dart';
+import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
 import 'package:eClassify/Ui/screens/widgets/AnimatedRoutes/blur_page_route.dart';
 import 'package:eClassify/Ui/screens/widgets/blurred_dialoge_box.dart';
 import 'package:eClassify/utils/Extensions/extensions.dart';
@@ -44,8 +44,8 @@ import '../../data/cubits/subscription/fetch_user_package_limit_cubit.dart';
 import '../../data/model/ReportProperty/reason_model.dart';
 import 'AdBannderScreen.dart';
 import 'chat/chat_screen.dart';
-import 'home/Widgets/grid_list_adapter.dart';
-import 'home/Widgets/home_sections_adapter.dart';
+import 'ItemHomeScreen/Widgets/grid_list_adapter.dart';
+import 'ItemHomeScreen/Widgets/home_sections_adapter.dart';
 import 'widgets/Errors/no_internet.dart';
 import 'widgets/Errors/something_went_wrong.dart';
 import 'widgets/shimmerLoadingContainer.dart';

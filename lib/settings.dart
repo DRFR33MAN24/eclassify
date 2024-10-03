@@ -55,7 +55,7 @@ it will call API in background without showing the process and when data availab
   ///Native deep link
   //static const String shareNavigationWebUrl = "eclassify.thewrteam.in";
 
-  static const String shareNavigationWebUrl = "eclassify.wrteam.me";
+  static const String shareNavigationWebUrl = "aldalil.eu";
 
   /// You will find this prefix from firebase console in dynamic link section
   static const String deepLinkPrefix =
@@ -72,7 +72,7 @@ it will call API in background without showing the process and when data availab
   static const int otpTimeOutSecond = 60 * 2;
 
   ///This code will show on login screen [Note: don't add  + symbol]
-  static const String defaultCountryCode = "91";
+  static const String defaultCountryCode = "32";
   static const bool disableCountrySelection = false;
 
   ///Lottie animation

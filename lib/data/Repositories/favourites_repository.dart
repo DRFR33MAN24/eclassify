@@ -36,4 +36,25 @@ class FavoriteRepository {
       modelList: modelList,
     );
   }
+
+   Future<DataOutput<ItemModel>> fetchServiceFavorites({required int page}) async {
+    Map<String, dynamic> parameters = {
+      Api.page: page,
+    };
+
+    Map<String, dynamic> response = await Api.get(
+      url: Api.getServiceFavoriteItemApi,
+      queryParameters: parameters,
+      useBaseUrl: true,
+    );
+
+    List<ItemModel> modelList = (response['data']['data'] as List)
+        .map((e) => ItemModel.fromJson(e))
+        .toList();
+
+    return DataOutput<ItemModel>(
+      total: response['data']['total'] ?? 0,
+      modelList: modelList,
+    );
+  }
 }

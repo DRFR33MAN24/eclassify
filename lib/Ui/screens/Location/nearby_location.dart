@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:eClassify/Ui/screens/home/home_screen.dart';
+import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
 import 'package:eClassify/utils/Extensions/extensions.dart';
 import 'package:eClassify/utils/hive_utils.dart';
 import 'package:eClassify/utils/responsiveSize.dart';

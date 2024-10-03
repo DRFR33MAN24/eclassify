@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:country_picker/country_picker.dart';
 import 'package:device_region/device_region.dart';
-import 'package:eClassify/Ui/screens/home/home_screen.dart';
+import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
 import 'package:eClassify/Ui/screens/widgets/custom_text_form_field.dart';
 import 'package:eClassify/utils/Login/lib/login_status.dart';
 import 'package:eClassify/utils/api.dart';

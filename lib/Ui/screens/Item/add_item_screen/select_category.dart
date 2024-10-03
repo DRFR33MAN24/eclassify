@@ -10,7 +10,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../utils/api.dart';
 import '../../../../utils/cloudState/cloud_state.dart';
 import '../../../../utils/touch_manager.dart';
-import '../../../../data/cubits/category/fetch_sub_categories_cubit.dart';
+import '../../../../data/cubits/category/items/fetch_sub_categories_cubit.dart';
 import '../../widgets/AnimatedRoutes/blur_page_route.dart';
 import '../../widgets/Errors/no_data_found.dart';
 import '../../widgets/Errors/no_internet.dart';

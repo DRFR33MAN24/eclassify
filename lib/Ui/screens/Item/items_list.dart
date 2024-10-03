@@ -15,9 +15,9 @@ import '../../../utils/api.dart';
 
 import '../../../utils/responsiveSize.dart';
 import '../../../utils/ui_utils.dart';
-import '../home/Widgets/home_sections_adapter.dart';
+import '../ItemHomeScreen/Widgets/home_sections_adapter.dart';
 import '../widgets/Errors/no_data_found.dart';
-import '../home/Widgets/item_horizontal_card.dart';
+import '../ItemHomeScreen/Widgets/item_horizontal_card.dart';
 import '../main_activity.dart';
 import '../native_ads_screen.dart';
 import '../widgets/AnimatedRoutes/blur_page_route.dart';

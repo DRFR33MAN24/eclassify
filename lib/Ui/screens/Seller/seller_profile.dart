@@ -1,5 +1,5 @@
 ﻿import 'package:cached_network_image/cached_network_image.dart';
-import 'package:eClassify/Ui/screens/home/home_screen.dart';
+import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
 import 'package:eClassify/utils/Extensions/extensions.dart';
 import 'package:eClassify/utils/responsiveSize.dart';
 import 'package:eClassify/utils/ui_utils.dart';
@@ -14,7 +14,7 @@ import '../../../utils/AppIcon.dart';
 import '../../../utils/customHeroAnimation.dart';
 import '../../../utils/sliver_grid_delegate_with_fixed_cross_axis_count_and_fixed_height.dart';
 import '../../../exports/main_export.dart';
-import '../home/Widgets/home_sections_adapter.dart';
+import '../ItemHomeScreen/Widgets/home_sections_adapter.dart';
 import '../widgets/AnimatedRoutes/blur_page_route.dart';
 import 'dart:ui' as ui;
 import 'package:intl/intl.dart';

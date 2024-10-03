@@ -1,15 +1,19 @@
 import 'package:eClassify/Ui/screens/Auth/Login/forgot_password.dart';
 import 'package:eClassify/Ui/screens/Auth/SignUp/signup_screen.dart';
+import 'package:eClassify/Ui/screens/Service/add_item_screen/add_item_details.dart';
 import 'package:eClassify/Ui/screens/chat/blocked_user_list_screen.dart';
 
 import 'package:eClassify/Ui/screens/FavoriteScreen.dart';
-import 'package:eClassify/Ui/screens/home/Widgets/categoryFilterScreen.dart';
-import 'package:eClassify/Ui/screens/home/Widgets/postedSinceFilter.dart';
+import 'package:eClassify/Ui/screens/ItemHomeScreen/Widgets/categoryFilterScreen.dart';
+import 'package:eClassify/Ui/screens/ItemHomeScreen/Widgets/postedSinceFilter.dart';
 import 'package:eClassify/Ui/screens/Item/add_item_screen/Widgets/PdfViewer.dart';
 import 'package:eClassify/Ui/screens/Item/add_item_screen/add_item_details.dart';
-import 'package:eClassify/Ui/screens/Item/add_item_screen/confirm_location_screen.dart';
-import 'package:eClassify/Ui/screens/Item/add_item_screen/more_details.dart';
-import 'package:eClassify/Ui/screens/Item/items_list.dart';
+import 'package:eClassify/Ui/screens/Item/add_item_screen/confirm_location_screen.dart' as Item;
+import 'package:eClassify/Ui/screens/Service/add_item_screen/confirm_location_screen.dart' as Service;
+import 'package:eClassify/Ui/screens/Item/add_item_screen/more_details.dart' as Item;
+import 'package:eClassify/Ui/screens/Service/add_item_screen/more_details.dart' as Service;
+import 'package:eClassify/Ui/screens/Item/items_list.dart' as Item;
+import 'package:eClassify/Ui/screens/Service/items_list.dart' as Service;
 import 'package:eClassify/Ui/screens/Location/cities_screen.dart';
 import 'package:eClassify/Ui/screens/Location/countries_screen.dart';
 import 'package:eClassify/Ui/screens/Location/states_screen.dart';
@@ -18,6 +22,7 @@ import 'package:eClassify/Ui/screens/SubCategory/SubCategoryScreen.dart';
 import 'package:eClassify/Ui/screens/ad_details_screen.dart';
 import 'package:eClassify/Ui/screens/faqs_screen.dart';
 import 'package:eClassify/Ui/screens/location_permission_screen.dart';
+import 'package:eClassify/Ui/screens/service_details_screen.dart';
 import 'package:eClassify/Ui/screens/sold_out_bought_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +32,15 @@ import '../Ui/screens/Auth/SignUp/mobile_signup_screen.dart';
 import '../Ui/screens/Auth/SignUp/signup_main_screen.dart';
 import '../Ui/screens/Blogs/blog_details.dart';
 import '../Ui/screens/Blogs/blogs_screen.dart';
-import '../Ui/screens/home/Widgets/subCategoryFilterScreen.dart';
-import '../Ui/screens/home/category_list.dart';
-import '../Ui/screens/home/change_language_screen.dart';
-import '../Ui/screens/home/search_screen.dart';
+import '../Ui/screens/ItemHomeScreen/Widgets/subCategoryFilterScreen.dart';
+import '../Ui/screens/ItemHomeScreen/category_list.dart' as Item;
+import '../Ui/screens/ServiceHomeScreen/category_list.dart' as Service;
+import '../Ui/screens/ItemHomeScreen/change_language_screen.dart';
+import '../Ui/screens/ItemHomeScreen/search_screen.dart' as Item;
+import '../Ui/screens/ServiceHomeScreen/search_screen.dart' as Service;
 import '../Ui/screens/Item/add_item_screen/Widgets/success_item_screen.dart';
-import '../Ui/screens/Item/add_item_screen/select_category.dart';
+import '../Ui/screens/Item/add_item_screen/select_category.dart' as Item;
+import '../Ui/screens/Service/add_item_screen/select_category.dart' as Service;
 import '../Ui/screens/Item/my_items_screen.dart';
 import '../Ui/screens/Item/viewAll.dart';
 import '../Ui/screens/Location/areas_screen.dart';
@@ -76,9 +84,11 @@ class Routes {
   static const addItem = 'addItem';
   static const waitingScreen = 'waitingScreen';
   static const categories = 'Categories';
+   static const services = 'Services';
   static const addresses = 'address';
   static const chooseAdrs = 'chooseAddress';
   static const itemsList = 'itemsList';
+    static const serviceList = 'serviceList';
   static const contactUs = 'ContactUs';
   static const profileSettings = 'profileSettings';
   static const filterScreen = 'filterScreen';
@@ -97,6 +107,7 @@ class Routes {
 
   static const languageListScreenRoute = '/languageListScreenRoute';
   static const searchScreenRoute = '/searchScreenRoute';
+   static const searchServiceScreenRoute = '/searchServiceScreenRoute';
   static const itemMapScreen = '/ItemMap';
   static const dashboard = '/dashboard';
   static const subCategoryScreen = '/subCategoryScreen';
@@ -129,13 +140,19 @@ class Routes {
   static const selectOutdoorFacility = '/selectOutdoorFacility';
   static const adDetailsScreen = '/adDetailsScreen';
   static const successItemScreen = '/successItemScreen';
+   static const serviceDetailsScreen = '/serviceDetailsScreen';
 
   ///Add item screens
   static const selectCategoryScreen = '/selectCategoryScreen';
   static const selectNestedCategoryScreen = '/selectNestedCategoryScreen';
+     static const selectServiceCategoryScreen = '/selectServiceCategoryScreen';
+      static const selectServiceNestedCategoryScreen = '/selectServiceNestedCategoryScreen';
+       static const addServiceDetails = '/addServiceDetails';
   static const addItemDetails = '/addItemDetails';
   static const addMoreDetailsScreen = '/addMoreDetailsScreen';
   static const confirmLocationScreen = '/confirmLocationScreen';
+    static const addMoreServiceDetailsScreen = '/addMoreServiceDetailsScreen';
+  static const confirmServiceLocationScreen = '/confirmServiceLocationScreen';
   static const sectionWiseItemsScreen = '/sectionWiseItemsScreen';
   static const blockedUserListScreen = '/blockedUserListScreen';
   static const payStackWebViewScreen = '/payStackWebViewScreen';
@@ -206,7 +223,9 @@ class Routes {
         return UserProfileScreen.route(routeSettings);
 
       case categories:
-        return CategoryList.route(routeSettings);
+        return Item.CategoryList.route(routeSettings);
+      case services:
+        return Service.CategoryList.route(routeSettings);
       case subCategoryScreen:
         return SubCategoryScreen.route(routeSettings);
       case categoryFilterScreen:
@@ -263,30 +282,51 @@ class Routes {
       case myItemScreen:
         return ItemsScreen.route(routeSettings);
       case searchScreenRoute:
-        return SearchScreen.route(routeSettings);
+        return Item.SearchScreen.route(routeSettings);
+      case searchServiceScreenRoute:
+        return Service.SearchScreen.route(routeSettings);
 
       case itemsList:
-        return ItemsList.route(routeSettings);
+        return Item.ItemsList.route(routeSettings);
+              case serviceList:
+        return Service.ItemsList.route(routeSettings);
       case faqsScreen:
         return FaqsScreen.route(routeSettings);
 
-      //Add item screen
+
+             //Add item screen
       case selectCategoryScreen:
-        return SelectCategoryScreen.route(routeSettings);
+        return Item.SelectCategoryScreen.route(routeSettings);
+      case selectServiceCategoryScreen:
+        return Service.SelectCategoryScreen.route(routeSettings);
       case selectNestedCategoryScreen:
-        return SelectNestedCategory.route(routeSettings);
+        return Item.SelectNestedCategory.route(routeSettings);
+              case selectServiceNestedCategoryScreen:
+        return Service.SelectNestedCategory.route(routeSettings);
       case addItemDetails:
         return AddItemDetails.route(routeSettings);
+
+
+      case addServiceDetails:
+        return AddServiceDetails.route(routeSettings);
       case addMoreDetailsScreen:
-        return AddMoreDetailsScreen.route(routeSettings);
+        return Item.AddMoreDetailsScreen.route(routeSettings);
 
       case confirmLocationScreen:
-        return ConfirmLocationScreen.route(routeSettings);
+        return Item.ConfirmLocationScreen.route(routeSettings);
+      case addMoreServiceDetailsScreen:
+        return Service.AddMoreDetailsScreen.route(routeSettings);
+      case confirmServiceLocationScreen:
+        return Service.ConfirmLocationScreen.route(routeSettings);
       case sectionWiseItemsScreen:
         return SectionItemsScreen.route(routeSettings);
 
       case adDetailsScreen:
         return AdDetailsScreen.route(routeSettings);
+      case serviceDetailsScreen:
+        return ServiceDetailsScreen.route(routeSettings);
+
+ 
 
       case pdfViewerScreen:
         return PdfViewer.route(routeSettings);

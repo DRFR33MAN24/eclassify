@@ -13,6 +13,7 @@ import '../widgets/Errors/no_data_found.dart';
 import '../widgets/Errors/no_internet.dart' show NoInternet;
 import '../widgets/Errors/something_went_wrong.dart';
 import '../widgets/shimmerLoadingContainer.dart';
+import 'widgets/category_widget_home.dart';
 
 class BlogsScreen extends StatefulWidget {
   const BlogsScreen({super.key});
@@ -90,6 +91,7 @@ class _BlogsScreenState extends State<BlogsScreen> {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
+                   const CategoryWidgetHome(),
                   Expanded(
                     child: ListView.builder(
                         controller: _pageScrollController,

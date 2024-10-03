@@ -33,11 +33,13 @@ import '../../utils/helper_utils.dart';
 
 import '../../utils/responsiveSize.dart';
 import '../../utils/ui_utils.dart';
-import 'home/search_screen.dart';
+import 'ItemHomeScreen/search_screen.dart';
 import 'Item/my_items_screen.dart';
 import 'Userprofile/profile_screen.dart';
 import 'chat/chat_list_screen.dart';
-import 'home/home_screen.dart';
+
+import 'ItemHomeScreen/home_screen.dart' as ItemsUI;
+import 'package:eClassify/Ui/screens/ServiceHomeScreen/home_screen.dart' as ServicesUI;
 import 'widgets/blurred_dialoge_box.dart';
 
 List<ItemModel> myItemlist = [];
@@ -99,7 +101,7 @@ class MainActivityState extends State<MainActivity>
   bool isBack = false;
   late AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
-
+ bool isReverse = false;
   @override
   void initState() {
     super.initState();
@@ -394,11 +396,31 @@ class MainActivityState extends State<MainActivity>
   }*/
 
   late List<Widget> pages = [
-    HomeScreen(from: widget.from),
-    ChatListScreen(),
+    ItemsUI.HomeScreen(from: widget.from,),
+    ServicesUI.HomeScreen(from: widget.from),
     const ItemsScreen(),
     const ProfileScreen(),
+    ChatListScreen(),
   ];
+
+      ///Animation for sell and rent button
+  late final AnimationController _forSellAnimationController =
+      AnimationController(
+          vsync: this,
+          duration: const Duration(milliseconds: 400),
+          reverseDuration: const Duration(milliseconds: 400));
+  late final AnimationController _forRentController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+      reverseDuration: const Duration(milliseconds: 300));
+
+  ///END: Animation for sell and rent button
+  late final Animation<double> _sellTween = Tween<double>(begin: -50, end: 80)
+      .animate(CurvedAnimation(
+          parent: _forSellAnimationController, curve: Curves.easeIn));
+  late final Animation<double> _rentTween = Tween<double>(begin: -50, end: 30)
+      .animate(
+          CurvedAnimation(parent: _forRentController, curve: Curves.easeIn));
 
   @override
   Widget build(BuildContext context) {
@@ -440,6 +462,20 @@ class MainActivityState extends State<MainActivity>
         },
         child: Scaffold(
           backgroundColor: context.color.primaryColor,
+                floatingActionButton:FloatingActionButton(onPressed: null,child: 
+          Material(
+        type: MaterialType.transparency,
+        child: InkWell(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          onTap: () =>             pageCntrlr.animateToPage(5,
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut),
+          child:  UiUtils.getSvg(
+                  AppIcons.chatNav,
+                ),
+        ),
+      ),backgroundColor: context.color.secondaryColor,),
           bottomNavigationBar:
               Constant.maintenanceMode == "1" ? null : bottomBar(),
           body: Stack(
@@ -450,7 +486,128 @@ class MainActivityState extends State<MainActivity>
                 //onPageChanged: onItemSwipe,
                 children: pages,
               ),
-              if (Constant.maintenanceMode == "1") MaintenanceMode()
+              if (Constant.maintenanceMode == "1") MaintenanceMode(),
+                 SizedBox(
+                width: double.infinity,
+                height: context.screenHeight,
+                child: Stack(
+                  children: [
+                    AnimatedBuilder(
+                        animation: _forRentController,
+                        builder: (context, c) {
+                          return Positioned(
+                            bottom: _rentTween.value,
+                            left: (context.screenWidth / 2) - (181 / 2),
+                            child:      BlocListener<FetchUserPackageLimitCubit,
+                      FetchUserPackageLimitState>(
+                  listener: (context, state) {
+                    if (state is FetchUserPackageLimitFailure) {
+                      UiUtils.noPackageAvailableDialog(context);
+                    }
+                    if (state is FetchUserPackageLimitInSuccess) {
+                      UiUtils.checkUser(
+                          onNotGuest: () {
+                            Navigator.pushNamed(
+                                context, Routes.selectCategoryScreen,
+                                arguments: <String, dynamic>{});
+                          },
+                          context: context);
+                    }
+                  },
+                  child: 
+                             GestureDetector(
+                              onTap: () {
+                                                        context
+                            .read<FetchUserPackageLimitCubit>()
+                            .fetchUserPackageLimit(packageType: "item_listing");
+                             
+                              },
+                              child: Container(
+                                  width: 181,
+                                  height: 44,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: context.color.borderColor,
+                                        width: 1.5,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: context.color.primaryColor
+                                              .withOpacity(0.4),
+                                          offset: const Offset(0, 3),
+                                          blurRadius: 10,
+                                          spreadRadius: 0,
+                                        )
+                                      ],
+                                      color: context.color.territoryColor,
+                                      borderRadius: BorderRadius.circular(22)),
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      UiUtils.getSvg(AppIcons.adsNav,color: context.color.onTertiary),
+                                      SizedBox(
+                                        width: 7.rw(context),
+                                      ),
+                                      Text(UiUtils.getTranslatedLabel(
+                                              context, "ADs"))
+                                          .color(context.color.buttonColor),
+                                    ],
+                                  )),
+                            )),
+                          );
+                        }),
+                    AnimatedBuilder(
+                        animation: _forSellAnimationController,
+                        builder: (context, c) {
+                          return Positioned(
+                            bottom: _sellTween.value,
+                            left: (context.screenWidth / 2) - 128 / 2,
+                            child: GestureDetector(
+                              onTap: () {
+                                                UiUtils.checkUser(
+                          onNotGuest: () {
+                            Navigator.pushNamed(
+                                context, Routes.selectServiceCategoryScreen,
+                                arguments: <String, dynamic>{});
+                          },
+                          context: context);
+                              },
+                              child: Container(
+                                width: 128,
+                                height: 44,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: context.color.borderColor,
+                                      width: 1.5,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: context.color.territoryColor
+                                            .withOpacity(0.4),
+                                        offset: const Offset(0, 3),
+                                        blurRadius: 10,
+                                        spreadRadius: 0,
+                                      )
+                                    ],
+                                    color: context.color.territoryColor,
+                                    borderRadius: BorderRadius.circular(22)),
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    UiUtils.getSvg(AppIcons.serviceNav,color: context.color.onTertiary),
+                                    SizedBox(
+                                      width: 7.rw(context),
+                                    ),
+                                    Text(UiUtils.getTranslatedLabel(
+                                            context, "Service"))
+                                        .color(context.color.buttonColor),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );})]))
             ],
           ),
         ),
@@ -476,6 +633,9 @@ class MainActivityState extends State<MainActivity>
       }
     }
     FocusManager.instance.primaryFocus?.unfocus();
+
+      _forSellAnimationController.reverse();
+    _forRentController.reverse();
 
     if (index != 1) {
       context.read<SearchItemCubit>().clearSearch();
@@ -559,47 +719,43 @@ class MainActivityState extends State<MainActivity>
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               buildBottomNavigationbarItem(0, AppIcons.homeNav,
-                  AppIcons.homeNavActive, "homeTab".translate(context)),
-              buildBottomNavigationbarItem(1, AppIcons.chatNav,
-                  AppIcons.chatNavActive, "chat".translate(context)),
-              BlocListener<FetchUserPackageLimitCubit,
-                      FetchUserPackageLimitState>(
-                  listener: (context, state) {
-                    if (state is FetchUserPackageLimitFailure) {
-                      UiUtils.noPackageAvailableDialog(context);
-                    }
-                    if (state is FetchUserPackageLimitInSuccess) {
-                      Navigator.pushNamed(context, Routes.selectCategoryScreen,
-                          arguments: <String, dynamic>{});
-                    }
+                  AppIcons.homeNavActive, "adsTab".translate(context)),
+              // buildBottomNavigationbarItem(1, AppIcons.chatNav,
+              //     AppIcons.chatNavActive, "chat".translate(context)),
+                                              buildBottomNavigationbarItem(1, AppIcons.myAdsNav,
+                  AppIcons.myAdsNavActive, "servicesTab".translate(context)),
+              Transform(
+                transform: Matrix4.identity()..translate(0.toDouble(), -20),
+                child: GestureDetector(
+                  onTap: () async {
+                                        if (isReverse == false) {
+                  isReverse = true;
+                              
+                  _forRentController.forward();
+                  _forSellAnimationController.forward();
+                } else {
+                               
+                  isReverse = false;
+                  _forRentController.reverse();
+                  _forSellAnimationController.reverse();
+                }
+              
+              
                   },
-                  child: Transform(
-                    transform: Matrix4.identity()..translate(0.toDouble(), -20),
-                    child: GestureDetector(
-                      onTap: () async {
-                        //TODO:TEMP
-                        UiUtils.checkUser(
-                            onNotGuest: () {
-                              context
-                                  .read<FetchUserPackageLimitCubit>()
-                                  .fetchUserPackageLimit(
-                                      packageType: "item_listing");
-                            },
-                            context: context);
-                      },
-                      child: SizedBox(
-                        width: 53.rw(context),
-                        height: 58,
-                        child: svgLoaded == false
-                            ? Container()
-                            : SvgPicture.string(
-                                svgEdit.toSVGString() ?? "",
-                              ),
-                      ),
-                    ),
-                  )),
+                  child: SizedBox(
+                    width: 53.rw(context),
+                    height: 58,
+                    child: svgLoaded == false
+                        ? Container()
+                        : SvgPicture.string(
+                            svgEdit.toSVGString() ?? "",
+                          ),
+                  ),
+                ),
+              ),
               buildBottomNavigationbarItem(2, AppIcons.myAdsNav,
-                  AppIcons.myAdsNavActive, "myAdsTab".translate(context)),
+                  AppIcons.myAdsNavActive, "myContentTab".translate(context)),
+
               buildBottomNavigationbarItem(3, AppIcons.profileNav,
                   AppIcons.profileNavActive, "profileTab".translate(context))
             ]),

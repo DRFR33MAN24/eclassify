@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:eClassify/data/model/category_model.dart';
 import 'package:eClassify/data/model/seller_ratings_model.dart';
 
@@ -43,6 +45,8 @@ class ItemModel {
   String? country;
   int? isPurchased;
   List<UserRatings>? review;
+
+  Map<String, WorkingTime>? workingTimes;
 
   double? get latitude => _latitude;
 
@@ -107,7 +111,8 @@ class ItemModel {
       this.state,
       this.country,
       this.review,
-      this.isPurchased}) {
+      this.isPurchased,
+      this.workingTimes}) {
     this.latitude = latitude;
     this.longitude = longitude;
   }
@@ -150,7 +155,8 @@ class ItemModel {
       String? state,
       String? country,
       int? isPurchased,
-      List<UserRatings>? review}) {
+      List<UserRatings>? review,
+      Map<String, WorkingTime>? workingTimes}) {
     return ItemModel(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -191,6 +197,7 @@ class ItemModel {
       country: country ?? this.country,
       isPurchased: isPurchased ?? this.isPurchased,
       review: review ?? this.review,
+      workingTimes: workingTimes ?? this.workingTimes,
     );
   }
 
@@ -265,6 +272,18 @@ class ItemModel {
         customFields!.add(CustomFieldModel.fromMap(v));
       });
     }
+
+        if (json['working_times'] != null) {
+      try {
+        Map<String, dynamic> workingTimesMap = Map<String, dynamic>.from(jsonDecode(json['working_times']));
+        workingTimes = workingTimesMap.map((key, value) => MapEntry(key, WorkingTime.fromJson(value)));
+      } catch (e) {
+        print('Error parsing working_times: $e');
+        workingTimes = null;
+      }
+    } else {
+      workingTimes = null;
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -321,12 +340,45 @@ class ItemModel {
     if (customFields != null) {
       data['custom_fields'] = customFields!.map((v) => v.toMap()).toList();
     }
+
+        if (workingTimes != null) {
+      data['working_times'] = workingTimes!.map((key, value) => MapEntry(key, value.toJson()));
+    }
     return data;
   }
 
   @override
   String toString() {
     return 'ItemModel{id: $id, name: $name,slug:$slug, description: $description, price: $price, image: $image, watermarkimage: $watermarkimage, latitude: $latitude, longitude: $longitude, address: $address, contact: $contact, total_likes: $totalLikes,isLiked: $isLike, isFeature: $isFeature,views: $views, type: $type, status: $status, active: $active, videoLink: $videoLink, user: $user, galleryImages: $galleryImages,itemOffers:$itemOffers, category: $category, customFields: $customFields,createdAt:$created,itemType:$itemType,userId:$userId,categoryId:$categoryId,isAlreadyOffered:$isAlreadyOffered,isAlreadyReported:$isAlreadyReported,allCategoryId:$allCategoryIds,rejected_reason:$rejectedReason,area_id:$areaId,area:$area,city:$city,state:$state,country:$country,is_purchased:$isPurchased,review:$review}';
+  }
+}
+
+
+class WorkingTime {
+  bool isVacationDay;
+  String openingTime;
+  String closingTime;
+
+  WorkingTime({
+    required this.isVacationDay,
+    required this.openingTime,
+    required this.closingTime,
+  });
+
+  factory WorkingTime.fromJson(Map<String, dynamic> json) {
+    return WorkingTime(
+      isVacationDay: json['isVacationDay'] ?? false,
+      openingTime: json['openingTime'] ?? '',
+      closingTime: json['closingTime'] ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'isVacationDay': isVacationDay,
+      'openingTime': openingTime,
+      'closingTime': closingTime,
+    };
   }
 }
 

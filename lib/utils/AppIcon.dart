@@ -118,6 +118,12 @@ class AppIcons {
   static String profileNav = _svgPath("bottomnav/profile");
   static String profileNavActive = _svgPath("bottomnav/profile_active");
 
+
+  static String serviceNav = _svgPath("bottomnav/service");
+  static String serviceNavActive = _svgPath("bottomnav/service_active");
+  static String adsNav = _svgPath("bottomnav/ad");
+  static String adsNavActive = _svgPath("bottomnav/ad_active");
+
   ///
   static String _svgPath(String name) {
     return "$_basePath$name.svg";

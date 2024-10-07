@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "277896590779-arebnlvrr41ug4kvovui6ufkalv1flg5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.watanplatform.aldalil",
+            "certificate_hash": "d060b29e3d7af8ef8a586a29fb1a1997d776e7a1"
+          }
+        },
+        {
           "client_id": "277896590779-bh6rthibivk4nqf1i07mah9dlt39h80g.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -53,11 +53,11 @@ class FetchBlogsCubit extends Cubit<FetchBlogsState> {
 
   final BlogsRepository _blogRepository = BlogsRepository();
 
-  Future<void> fetchBlogs() async {
+  Future<void> fetchBlogs(int catId) async {
     try {
       emit(FetchBlogsInProgress());
 
-      DataOutput<BlogModel> result = await _blogRepository.fetchBlogs(page: 1);
+      DataOutput<BlogModel> result = await _blogRepository.fetchBlogs(page: 1,catId:catId);
 
       emit(
         FetchBlogsSuccess(
@@ -72,7 +72,7 @@ class FetchBlogsCubit extends Cubit<FetchBlogsState> {
     }
   }
 
-  Future<void> fetchBlogsMore() async {
+  Future<void> fetchBlogsMore(int catId) async {
     try {
       if (state is FetchBlogsSuccess) {
         if ((state as FetchBlogsSuccess).isLoadingMore) {
@@ -82,7 +82,7 @@ class FetchBlogsCubit extends Cubit<FetchBlogsState> {
         emit((state as FetchBlogsSuccess).copyWith(isLoadingMore: true));
 
         DataOutput<BlogModel> result = await _blogRepository.fetchBlogs(
-          page: (state as FetchBlogsSuccess).page + 1,
+          page: (state as FetchBlogsSuccess).page + 1,catId: catId
         );
 
         FetchBlogsSuccess blogModelState = (state as FetchBlogsSuccess);

@@ -33,7 +33,7 @@ class HomeSectionsAdapter extends StatelessWidget {
                 TitleHeader(
                   title: section.title ?? "",
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.sectionWiseItemsScreen,
+                    Navigator.pushNamed(context, Routes.sectionWiseServicesScreen,
                         arguments: {
                           "title": section.title,
                           "sectionId": section.sectionId,
@@ -68,7 +68,7 @@ class HomeSectionsAdapter extends StatelessWidget {
                 TitleHeader(
                   title: section.title ?? "",
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.sectionWiseItemsScreen,
+                    Navigator.pushNamed(context, Routes.searchServiceScreenRoute,
                         arguments: {
                           "title": section.title,
                           "sectionId": section.sectionId,
@@ -102,7 +102,7 @@ class HomeSectionsAdapter extends StatelessWidget {
                 TitleHeader(
                   title: section.title ?? "",
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.sectionWiseItemsScreen,
+                    Navigator.pushNamed(context, Routes.sectionWiseServicesScreen,
                         arguments: {
                           "title": section.title,
                           "sectionId": section.sectionId,
@@ -133,7 +133,7 @@ class HomeSectionsAdapter extends StatelessWidget {
                 TitleHeader(
                   title: section.title ?? "",
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.sectionWiseItemsScreen,
+                    Navigator.pushNamed(context, Routes.searchServiceScreenRoute,
                         arguments: {
                           "title": section.title,
                           "sectionId": section.sectionId,

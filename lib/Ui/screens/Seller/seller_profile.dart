@@ -1,5 +1,6 @@
 ﻿import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
+
 import 'package:eClassify/utils/Extensions/extensions.dart';
 import 'package:eClassify/utils/responsiveSize.dart';
 import 'package:eClassify/utils/ui_utils.dart';
@@ -10,11 +11,13 @@ import 'package:eClassify/data/model/seller_ratings_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../data/cubits/seller/fetch_seller_service_cubit.dart';
 import '../../../utils/AppIcon.dart';
 import '../../../utils/customHeroAnimation.dart';
 import '../../../utils/sliver_grid_delegate_with_fixed_cross_axis_count_and_fixed_height.dart';
 import '../../../exports/main_export.dart';
 import '../ItemHomeScreen/Widgets/home_sections_adapter.dart';
+import '../ServiceHomeScreen/Widgets/home_sections_adapter.dart' as Service;
 import '../widgets/AnimatedRoutes/blur_page_route.dart';
 import 'dart:ui' as ui;
 import 'package:intl/intl.dart';
@@ -44,6 +47,9 @@ class SellerProfileScreen extends StatefulWidget {
                 BlocProvider(
                   create: (context) => FetchSellerItemsCubit(),
                 ),
+                                BlocProvider(
+                  create: (context) => FetchSellerServicesCubit(),
+                ),
                 BlocProvider(
                   create: (context) => FetchSellerRatingsCubit(),
                 ),
@@ -67,7 +73,7 @@ class SellerProfileScreenState extends State<SellerProfileScreen>
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
 
     // Listen for changes in tab selection
     _tabController.addListener(() {
@@ -77,6 +83,7 @@ class SellerProfileScreenState extends State<SellerProfileScreen>
     controller = ScrollController()..addListener(_loadMore);
     reviewController = ScrollController()..addListener(_reviewLoadMore);
     context.read<FetchSellerItemsCubit>().fetch(sellerId: widget.model.id!);
+       context.read<FetchSellerServicesCubit>().fetch(sellerId: widget.model.id!);
     context.read<FetchSellerRatingsCubit>().fetch(sellerId: widget.model.id!);
     super.initState();
   }
@@ -96,6 +103,12 @@ class SellerProfileScreenState extends State<SellerProfileScreen>
       if (context.read<FetchSellerItemsCubit>().hasMoreData()) {
         context
             .read<FetchSellerItemsCubit>()
+            .fetchMore(sellerId: widget.model.id!);
+      }
+
+            if (context.read<FetchSellerServicesCubit>().hasMoreData()) {
+        context
+            .read<FetchSellerServicesCubit>()
             .fetchMore(sellerId: widget.model.id!);
       }
     }
@@ -261,6 +274,7 @@ class SellerProfileScreenState extends State<SellerProfileScreen>
                             .copyWith(fontWeight: FontWeight.w500),
                         tabs: [
                           Tab(text: 'liveAds'.translate(context)),
+                          Tab(text: 'liveServices'.translate(context)),
                           Tab(text: 'ratings'.translate(context)),
                         ],
                       ),
@@ -281,6 +295,7 @@ class SellerProfileScreenState extends State<SellerProfileScreen>
               controller: _tabController,
               children: [
                 liveAdsWidget(),
+                liveServicesWidget(),
                 ratingsListWidget(),
               ],
             ),
@@ -288,6 +303,80 @@ class SellerProfileScreenState extends State<SellerProfileScreen>
         ),
       ),
     );
+  }
+
+    Widget liveServicesWidget() {
+    return BlocBuilder<FetchSellerServicesCubit, FetchSellerServicesState>(
+        builder: (context, state) {
+      if (state is FetchSellerServicesInProgress) {
+        return buildItemsShimmer(context);
+      }
+
+      if (state is FetchSellerServicesFail) {
+        return Center(
+          child: Text(state.error),
+        );
+      }
+      if (state is FetchSellerServicesSuccess) {
+        if (state.items.isEmpty) {
+          return Center(
+            child: NoDataFound(
+              onTap: () {
+                context
+                    .read<FetchSellerServicesCubit>()
+                    .fetch(sellerId: widget.model.id!);
+              },
+            ),
+          );
+        }
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("${state.total.toString()}\t${"serviceLive".translate(context)}")
+                  .bold(weight: FontWeight.w600)
+                  .size(context.font.large),
+              Expanded(
+                child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.only(top: 10),
+                  shrinkWrap: true,
+                  // Allow GridView to fit within the space
+                  gridDelegate:
+                      SliverGridDelegateWithFixedCrossAxisCountAndFixedHeight(
+                          crossAxisCount: 2,
+                          height: MediaQuery.of(context).size.height /
+                              3.5.rh(context),
+                          mainAxisSpacing: 7,
+                          crossAxisSpacing: 10),
+                  itemCount: state.items.length,
+                  itemBuilder: (context, index) {
+                    ItemModel item = state.items[index];
+
+                    return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            Routes.serviceDetailsScreen,
+                            arguments: {
+                              'model': item,
+                            },
+                          );
+                        },
+                        child: Service.ItemCard(
+                          item: item,
+                        ));
+                  },
+                ),
+              ),
+              if (state.isLoadingMore) UiUtils.progress()
+            ],
+          ),
+        );
+      }
+      return Container();
+    });
   }
 
   Widget liveAdsWidget() {

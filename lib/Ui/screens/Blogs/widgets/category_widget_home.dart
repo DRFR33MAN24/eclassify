@@ -1,5 +1,6 @@
 
 import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
+import 'package:eClassify/data/cubits/category/blogs/fetch_blog_category_cubit.dart';
 import 'package:eClassify/utils/AppIcon.dart';
 import 'package:eClassify/utils/Extensions/extensions.dart';
 import 'package:eClassify/utils/ui_utils.dart';
@@ -15,9 +16,9 @@ class CategoryWidgetHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FetchServiceCategoryCubit, FetchServiceCategoryState>(
+    return BlocBuilder<FetchBlogCategoryCubit, FetchBlogCategoryState>(
       builder: (context, state) {
-        if (state is FetchServiceCategorySuccess) {
+        if (state is FetchBlogCategorySuccess) {
           if (state.categories.isNotEmpty) {
             return Padding(
               padding: const EdgeInsets.only(top: 12),
@@ -26,12 +27,15 @@ class CategoryWidgetHome extends StatelessWidget {
              
                 child: LayoutBuilder(
   builder: (context, constraints) {
-    int crossAxisCount = 4; // Number of columns
-    double itemHeight = 40.0; // Height of each item
+    int crossAxisCount = 3; // Number of columns
+    double itemHeight = 70.0; // Height of each item
     double itemSpacing = 10.0; // Spacing between items
 
+    // Limit the number of categories to a maximum of 10
+    int displayCount = state.categories.length > 8 ? 8 : state.categories.length;
+    
     // Calculate the number of rows
-    int rowCount = (state.categories.length + 1) ~/ crossAxisCount +4;
+    int rowCount = (displayCount + 1) ~/ crossAxisCount +1; // +1 for the "moreCategory" widget
     
     // Calculate total height: rows * itemHeight + spacing between rows
     double gridHeight = (rowCount * itemHeight) + ((rowCount - 1) * itemSpacing);
@@ -45,7 +49,7 @@ class CategoryWidgetHome extends StatelessWidget {
           crossAxisCount: crossAxisCount,
           crossAxisSpacing: itemSpacing,
           mainAxisSpacing: itemSpacing,
-          childAspectRatio: 0.8, // Adjust this ratio to fit your design
+          childAspectRatio: 1, // Adjust this ratio to fit your design
         ),
         itemCount: state.categories.length + 1,
         itemBuilder: (context, index) {
@@ -57,9 +61,10 @@ class CategoryWidgetHome extends StatelessWidget {
               url: state.categories[index].url!,
               onTap: () {
                 if (state.categories[index].children!.isNotEmpty) {
+                  
                   Navigator.pushNamed(
                     context,
-                    Routes.subCategoryScreen,
+                    Routes.blogsScreenRoute,
                     arguments: {
                       "categoryList": state.categories[index].children,
                       "catName": state.categories[index].name,
@@ -70,9 +75,9 @@ class CategoryWidgetHome extends StatelessWidget {
                 } else {
                   Navigator.pushNamed(
                     context,
-                    Routes.serviceList,
+                    Routes.blogsScreenRoute,
                     arguments: {
-                      'catID': state.categories[index].id.toString(),
+                      'catId': state.categories[index].id,
                       'catName': state.categories[index].name,
                       "categoryIds": [state.categories[index].id.toString()],
                     },
@@ -152,10 +157,11 @@ class CategoryWidgetHome extends StatelessWidget {
 
   Widget moreCategory(BuildContext context) {
     return SizedBox(
-      width: 70,
+      width: 60,
+      height: 60,
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, Routes.services,
+          Navigator.pushNamed(context, Routes.blogs,
               arguments: {"from": Routes.home}).then(
             (dynamic value) {
               if (value != null) {
@@ -166,20 +172,20 @@ class CategoryWidgetHome extends StatelessWidget {
           );
         },
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(70),
+          borderRadius: BorderRadius.circular(20),
           child: Column(
             children: [
               Container(
                 clipBehavior: Clip.antiAlias,
-                height: 70,
+                height: 60,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(70),
+                  borderRadius: BorderRadius.circular(20),
 
                   color: context.color.secondaryColor,
                 ),
                 child: Center(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(70),
+                    borderRadius: BorderRadius.circular(20),
                     child: SizedBox(
                       // color: Colors.blue,
                       width: 48,
@@ -194,17 +200,17 @@ class CategoryWidgetHome extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.all(0.0),
-                child:  Text("more".translate(context))
-                    .centerAlign()
-                    .setMaxLines(lines: 2)
-                    .size(context.font.smaller)
-                    .color(
-                      context.color.textDefaultColor,
-                    ),
-              ))
+              // Expanded(
+              //     child: Padding(
+              //   padding: const EdgeInsets.all(0.0),
+              //   child:  Text("more".translate(context))
+              //       .centerAlign()
+              //       .setMaxLines(lines: 2)
+              //       .size(context.font.smaller)
+              //       .color(
+              //         context.color.textDefaultColor,
+              //       ),
+              // ))
             ],
           ),
         ),

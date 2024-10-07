@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:eClassify/Ui/screens/widgets/Errors/no_internet.dart';
@@ -23,6 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../exports/main_export.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -279,7 +281,7 @@ class SplashScreenState extends State<SplashScreen>
                   backgroundColor: context.color.territoryColor,
                   bottomNavigationBar: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: UiUtils.getSvg(AppIcons.companyLogo),
+                    child:Image.asset('assets/svg/Logo/company_logo.png',width: 135,height: 40,),
                   ),
                   body: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -292,7 +294,7 @@ class SplashScreenState extends State<SplashScreen>
                           child: SizedBox(
                             width: 150.rw(context),
                             height: 150.rh(context),
-                            child: UiUtils.getSvg(AppIcons.splashLogo),
+                            child: UiUtils.getSvg(AppIcons.splashLogo,color: Colors.white),
                           ),
                         ),
                       ),

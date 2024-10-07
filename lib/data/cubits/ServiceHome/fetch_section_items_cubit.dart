@@ -60,7 +60,7 @@ class FetchSectionItemsCubit extends Cubit<FetchSectionItemsState>
       int? areaId}) async {
     try {
       emit(FetchSectionItemsInProgress());
-      DataOutput<ItemModel> result = await _homeRepository.fetchSectionItems(
+      DataOutput<ItemModel> result = await _homeRepository.fetchSectionServices(
           page: 1,
           sectionId: sectionId,
           state: state,
@@ -94,7 +94,7 @@ class FetchSectionItemsCubit extends Cubit<FetchSectionItemsState>
           return;
         }
         emit((state as FetchSectionItemsSuccess).copyWith(isLoadingMore: true));
-        DataOutput<ItemModel> result = await _homeRepository.fetchSectionItems(
+        DataOutput<ItemModel> result = await _homeRepository.fetchSectionServices(
             page: (state as FetchSectionItemsSuccess).page + 1,
             sectionId: sectionId,
             state: state,

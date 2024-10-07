@@ -27,19 +27,20 @@ class CategoryHomeCard extends StatelessWidget {
       isFullImage = true;
     }
     return SizedBox(
-      width: 70,
+         width: 60,
+      height: 60,
       child: GestureDetector(
         onTap: onTap,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(70),
+          borderRadius: BorderRadius.circular(20),
           child: Container(
             child: Column(
               children: [
                 if (isFullImage) ...[
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(70),
+                    borderRadius: BorderRadius.circular(20),
                     child: Container(
-                      height: 70,
+                      height: 60,
                       width: double.infinity,
                       color: context.color.secondaryColor,
                       child: UiUtils.imageType(url, fit: BoxFit.cover),
@@ -48,15 +49,15 @@ class CategoryHomeCard extends StatelessWidget {
                 ] else ...[
                   Container(
                     clipBehavior: Clip.antiAlias,
-                    height: 70,
+                    height: 60,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(70),
+                      borderRadius: BorderRadius.circular(20),
                     
                       color: context.color.secondaryColor,
                     ),
                     child: Center(
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(70),
+                        borderRadius: BorderRadius.circular(60),
                         child: SizedBox(
                           // color: Colors.blue,
                           width: 48,

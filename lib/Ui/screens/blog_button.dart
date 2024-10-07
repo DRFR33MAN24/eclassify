@@ -150,7 +150,7 @@ class BlogButton extends StatelessWidget {
           GestureDetector(
             onTap: () async {
               Navigator.pushNamed(context, Routes.blogsScreenRoute,
-                  arguments: {"from": "home"});
+                  arguments: {"from": "home","catId":-1});
   
             },
             child: Container(

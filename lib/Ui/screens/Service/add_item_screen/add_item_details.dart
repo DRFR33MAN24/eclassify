@@ -229,7 +229,7 @@ class _AddServiceDetailsState extends CloudState<AddServiceDetails> {
         child: SafeArea(
           child: Scaffold(
             appBar: UiUtils.buildAppBar(context,
-                showBackButton: true, title: "ServicDetails".translate(context)),
+                showBackButton: true, title: "ServiceDetails".translate(context)),
             bottomNavigationBar: Container(
               color: Colors.transparent,
               child: Padding(
@@ -513,31 +513,31 @@ class _AddServiceDetailsState extends CloudState<AddServiceDetails> {
                         height: 10.rh(context),
                       ),
                       itemImagesListener(),
-                      SizedBox(
-                        height: 10.rh(context),
-                      ),
-                      Text("price".translate(context)),
-                      SizedBox(
-                        height: 10.rh(context),
-                      ),
-                      CustomTextFormField(
-                        controller: adPriceController,
-                        action: TextInputAction.next,
-                        prefix: Text("${Constant.currencySymbol} "),
-                        // controller: _priceController,
-                        formaters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp(r'^\d+\.?\d*')),
-                        ],
-                        isReadOnly: false,
-                        keyboard: TextInputType.number,
-                        validator: CustomTextFieldValidator.nullCheck,
-                        hintText: "00",
-                        hintTextStyle: TextStyle(
-                            color:
-                                context.color.textDefaultColor.withOpacity(0.5),
-                            fontSize: context.font.large),
-                      ),
+                      // SizedBox(
+                      //   height: 10.rh(context),
+                      // ),
+                      // Text("price".translate(context)),
+                      // SizedBox(
+                      //   height: 10.rh(context),
+                      // ),
+                      // CustomTextFormField(
+                      //   controller: adPriceController,
+                      //   action: TextInputAction.next,
+                      //   prefix: Text("${Constant.currencySymbol} "),
+                      //   // controller: _priceController,
+                      //   formaters: [
+                      //     FilteringTextInputFormatter.allow(
+                      //         RegExp(r'^\d+\.?\d*')),
+                      //   ],
+                      //   isReadOnly: false,
+                      //   keyboard: TextInputType.number,
+                      //   validator: CustomTextFieldValidator.nullCheck,
+                      //   hintText: "00",
+                      //   hintTextStyle: TextStyle(
+                      //       color:
+                      //           context.color.textDefaultColor.withOpacity(0.5),
+                      //       fontSize: context.font.large),
+                      // ),
                       SizedBox(
                         height: 10.rh(context),
                       ),
@@ -583,7 +583,7 @@ class _AddServiceDetailsState extends CloudState<AddServiceDetails> {
                       SizedBox(
                         height: 15.rh(context),
                       ),
-                                            Text("Opening times"),
+                                            Text("Opening times".translate(context)),
                       SizedBox(
                         height: 15.rh(context),
                       ),
@@ -886,7 +886,7 @@ class _AddServiceDetailsState extends CloudState<AddServiceDetails> {
               children: [
                 SizedBox(
                   width: 100,
-                  child: Text(day),
+                  child: Text(day.translate(context)),
                 ),
                 Expanded(
                   child: !isVacationDay[day]!
@@ -902,7 +902,7 @@ class _AddServiceDetailsState extends CloudState<AddServiceDetails> {
                                     validator:CustomTextFieldValidator.nullCheck,
                                     controller: openingTimeControllers[day]!,
                                     enable: !isVacationDay[day]!,
-                                    hintText: "Open",
+                                    hintText: "Open".translate(context),
                                   ),
                                 ),
                               ),
@@ -918,7 +918,7 @@ class _AddServiceDetailsState extends CloudState<AddServiceDetails> {
                                     validator:CustomTextFieldValidator.nullCheck,
                                     enable: !isVacationDay[day]!,
                                     controller: closingTimeControllers[day]!,
-                                    hintText: "Close",
+                                    hintText: "Close".translate(context),
                                   ),
                                 ),
                               ),
@@ -933,7 +933,7 @@ class _AddServiceDetailsState extends CloudState<AddServiceDetails> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Vacation day"),
+              Text("Vacation day".translate(context)),
               Checkbox(
                   value: isVacationDay[day]!,
                   onChanged: (value) {

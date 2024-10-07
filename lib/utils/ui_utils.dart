@@ -157,6 +157,7 @@ class UiUtils {
                   AppIcons.placeHolder,
                   width: width ?? 70,
                   height: height ?? 70,
+                   color: Colors.white
                 )));
       },
     );
@@ -186,6 +187,7 @@ class UiUtils {
                   AppIcons.placeHolder,
                   width: width ?? 70,
                   height: height ?? 70,
+                   color: Colors.white
                 )));
       },
       errorWidget: (context, url, error) {
@@ -201,6 +203,7 @@ class UiUtils {
               AppIcons.placeHolder,
               width: width ?? 70,
               height: height ?? 70,
+               color: Colors.white
             ),
           ),
         );

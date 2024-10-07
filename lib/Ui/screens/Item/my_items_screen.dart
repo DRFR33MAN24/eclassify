@@ -50,7 +50,7 @@ class MyItemState extends State<ItemsScreen> with TickerProviderStateMixin {
     ];
     sections = [
       {
-        "title": "allAds".translate(context),
+        "title": "all".translate(context),
         "status": "",
       },
       {

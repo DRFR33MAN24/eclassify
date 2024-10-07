@@ -1,18 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
-import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
+import 'package:eClassify/Ui/screens/ServiceHomeScreen/home_screen.dart';
 import 'package:eClassify/Ui/screens/widgets/AnimatedRoutes/blur_page_route.dart';
 import 'package:eClassify/Ui/screens/widgets/blurred_dialoge_box.dart';
 import 'package:eClassify/utils/Extensions/extensions.dart';
 import 'package:eClassify/utils/responsiveSize.dart';
 import 'package:eClassify/data/cubits/chatCubits/get_buyer_chat_users_cubit.dart';
 import 'package:eClassify/data/cubits/chatCubits/make_an_offer_item_cubit.dart';
-import 'package:eClassify/data/cubits/favorite/favoriteCubit.dart';
-import 'package:eClassify/data/cubits/item/create_featured_ad_cubit.dart';
-import 'package:eClassify/data/cubits/item/fetch_my_item_cubit.dart';
+import 'package:eClassify/data/cubits/ServiceFavorite/favoriteCubit.dart';
+import 'package:eClassify/data/cubits/service/create_featured_ad_cubit.dart';
+import 'package:eClassify/data/cubits/service/fetch_my_item_cubit.dart';
 import 'package:eClassify/data/cubits/item/item_total_click_cubit.dart';
-import 'package:eClassify/data/cubits/item/related_item_cubit.dart';
+import 'package:eClassify/data/cubits/service/related_item_cubit.dart' as Service;
 import 'package:eClassify/data/cubits/safety_tips_cubit.dart';
 import 'package:eClassify/data/cubits/seller/fetch_seller_ratings_cubit.dart';
 import 'package:eClassify/data/model/chat/chated_user_model.dart';
@@ -44,8 +44,8 @@ import '../../data/cubits/subscription/fetch_user_package_limit_cubit.dart';
 import '../../data/model/ReportProperty/reason_model.dart';
 import 'AdBannderScreen.dart';
 import 'chat/chat_screen.dart';
-import 'ItemHomeScreen/Widgets/grid_list_adapter.dart';
-import 'ItemHomeScreen/Widgets/home_sections_adapter.dart';
+import 'ServiceHomeScreen/Widgets/grid_list_adapter.dart';
+import 'ServiceHomeScreen/Widgets/home_sections_adapter.dart';
 import 'widgets/Errors/no_internet.dart';
 import 'widgets/Errors/something_went_wrong.dart';
 import 'widgets/shimmerLoadingContainer.dart';
@@ -160,7 +160,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
         currentPage = pageController.page!.round();
       });
     });
-    context.read<FetchRelatedItemsCubit>().fetchRelatedItems(
+    context.read<Service.FetchRelatedItemsCubit>().fetchRelatedItems(
         categoryId: categoryId!,
         city: HiveUtils.getCityName(),
         areaId: HiveUtils.getAreaId(),
@@ -171,8 +171,8 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
 
   void _pageScroll() {
     if (_pageScrollController.isEndReached()) {
-      if (context.read<FetchRelatedItemsCubit>().hasMoreData()) {
-        context.read<FetchRelatedItemsCubit>().fetchRelatedItemsMore(
+      if (context.read<Service.FetchRelatedItemsCubit>().hasMoreData()) {
+        context.read<Service.FetchRelatedItemsCubit>().fetchRelatedItemsMore(
             categoryId: categoryId!,
             city: HiveUtils.getCityName(),
             areaId: HiveUtils.getAreaId(),
@@ -435,13 +435,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
                 children: <Widget>[
                   setImageViewer(),
                   if (isAddedByMe) setLikesAndViewsCount(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Text(model.name!)
-                        .size(context.font.large)
-                        .setMaxLines(lines: 2)
-                        .color(context.color.textDefaultColor),
-                  ),
+
                   setPriceAndStatus(),
                   if (isAddedByMe) setRejectedReason(),
                   if (model.address != null) setAddress(isDate: true),
@@ -470,9 +464,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
                       thickness: 1,
                       color: context.color.textDefaultColor.withOpacity(0.1)),
                   setDescription(),
-                  Divider(
-                      thickness: 1,
-                      color: context.color.textDefaultColor.withOpacity(0.1)),
+
 
                                       if (model.workingTimes != null) ...[
                     Divider(
@@ -529,17 +521,17 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
   }
 
   Widget relatedAds() {
-    return BlocBuilder<FetchRelatedItemsCubit, FetchRelatedItemsState>(
+    return BlocBuilder<Service.FetchRelatedItemsCubit, Service.FetchRelatedItemsState>(
         builder: (context, state) {
-      if (state is FetchRelatedItemsInProgress) {
+      if (state is Service.FetchRelatedItemsInProgress) {
         return relatedItemShimmer();
       }
-      if (state is FetchRelatedItemsFailure) {
+      if (state is Service.FetchRelatedItemsFailure) {
         if (state.errorMessage is ApiException) {
           if (state.errorMessage == "no-internet") {
             return NoInternet(
               onRetry: () {
-                context.read<FetchRelatedItemsCubit>().fetchRelatedItems(
+                context.read<Service.FetchRelatedItemsCubit>().fetchRelatedItems(
                     categoryId: categoryId!,
                     city: HiveUtils.getCityName(),
                     areaId: HiveUtils.getAreaId(),
@@ -553,7 +545,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
         return const SomethingWentWrong();
       }
 
-      if (state is FetchRelatedItemsSuccess) {
+      if (state is Service.FetchRelatedItemsSuccess) {
         if (state.itemModel.isEmpty || state.itemModel.length == 1) {
           return SizedBox.shrink();
         }
@@ -565,7 +557,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
     });
   }
 
-  Widget buildRelatedListWidget(FetchRelatedItemsSuccess state) {
+  Widget buildRelatedListWidget(Service.FetchRelatedItemsSuccess state) {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: Column(
@@ -1009,18 +1001,18 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
                     arguments: {"isEdit": true});
               }, contextColor.secondaryColor, contextColor.territoryColor),
             ),
-            SizedBox(width: 10.rw(context)),
-            Expanded(
-              child: _buildButton("soldOut".translate(context), () async {
-                Navigator.pushNamed(context, Routes.soldOutBoughtScreen,
-                    arguments: {
-                      "itemId": model.id,
-                      "price": model.price,
-                      "itemName": model.name,
-                      "itemImage": model.image
-                    });
-              }, null, null),
-            ),
+            // SizedBox(width: 10.rw(context)),
+            // Expanded(
+            //   child: _buildButton("soldOut".translate(context), () async {
+            //     Navigator.pushNamed(context, Routes.soldOutBoughtScreen,
+            //         arguments: {
+            //           "itemId": model.id,
+            //           "price": model.price,
+            //           "itemName": model.name,
+            //           "itemImage": model.image
+            //         });
+            //   }, null, null),
+            // ),
           ],
         );
       } else if (model.status == "sold out" ||
@@ -1113,7 +1105,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
                         date: widget.model.created!,
                         itemTitle: widget.model.name!,
                         itemOfferId: state.data['id'],
-                        itemPrice: widget.model.price!,
+                        itemPrice: 0,
                         status: widget.model.status!,
                         buyerId: HiveUtils.getUserId(),
                         itemOfferPrice: state.data['amount'] != null
@@ -1141,9 +1133,9 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //if(!model.isAlreadyOffered!)
-                if (chatedUser == null /*!model.isAlreadyOffered!*/)
+                if (chatedUser == null ) SizedBox(width: 10.rw(context)),
                   Expanded(
-                    child: _buildButton("makeAnOffer".translate(context), () {
+                    child: _buildButton("callBtnLbl".translate(context), () {
                       /* if (Constant.isDemoModeOn) {
                         HelperUtils.showSnackBarMessage(context,
                             "thisActionNotValidDemo".translate(context));
@@ -1151,7 +1143,14 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
                       }*/
                       UiUtils.checkUser(
                           onNotGuest: () {
-                            safetyTipsBottomSheet();
+                                                HelperUtils.launchPathURL(
+                        isTelephone: false,
+                        isSMS: true,
+                        isMail: false,
+                        value: formatPhoneNumber(
+                            model.user!.mobile!, Constant.defaultCountryCode),
+                        context: context);
+                            //safetyTipsBottomSheet();
                             //makeOfferBottomSheet(model);
                           },
                           context: context);
@@ -1736,10 +1735,10 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 5),
-          child: Text("${Constant.currencySymbol} ${model.price.toString()}")
-              .size(context.font.larger)
-              .color(context.color.territoryColor)
-              .bold(),
+          child:  Text(model.name!)
+                        .size(context.font.extraLarge)
+                        .setMaxLines(lines: 2)
+                        .color(context.color.textDefaultColor)
         ),
         if (model.status != null && isAddedByMe)
           Container(
@@ -1848,7 +1847,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("workingTimesLbl".translate(context)).bold().size(context.font.large),
+        Text("Opening times".translate(context)).bold().size(context.font.large),
         SizedBox(height: 10), // Add some spacing
         if (model.workingTimes != null && model.workingTimes!.isNotEmpty)
           ...model.workingTimes!.entries.map((entry) {
@@ -1860,8 +1859,8 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("$day: ").color(context.color.textDefaultColor.withOpacity(0.5)),
-                    Text("${"vacation".translate(context)}").color(context.color.textDefaultColor.withOpacity(0.5)),
+                    Text(day.translate(context)).color(context.color.textDefaultColor.withOpacity(0.5)),
+                    Text("${"Vacation day".translate(context)}").color(context.color.textDefaultColor.withOpacity(0.5)),
                   ],
                 )
                     ,
@@ -1873,7 +1872,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("$day: ").color(context.color.textDefaultColor.withOpacity(0.5)),
+                    Text(day.translate(context)).color(context.color.textDefaultColor.withOpacity(0.5)),
                     Text("${workingTime.openingTime} - ${workingTime.closingTime}").color(context.color.textDefaultColor.withOpacity(0.5)),
                   ],
                 )
@@ -2026,7 +2025,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
                   ),
                   Expanded(
                     child: Text(
-                      "didYouFindAnyProblemWithThisItem".translate(context),
+                      "didYouFindAnyProblemWithThisService".translate(context),
                       maxLines: 2,
                     )
                         .color(context.color.textDefaultColor)
@@ -2067,7 +2066,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
                         .withOpacity(0.1), // Button color can be adjusted
                   ),
                   child: Text(
-                    "reportThisAd".translate(context),
+                    "reportThisService".translate(context),
                   )
                       .color(context.color.territoryColor)
                       .size(context.font.normal),

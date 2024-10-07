@@ -173,7 +173,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           valueListenable: Hive.box(HiveKeys.userDetailsBox).listenable(),
           builder: (context, Box box, _) {
             return Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -195,6 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           AppIcons.defaultPersonLogo,
                                           color: context.color.territoryColor,
                                           fit: BoxFit.none,
+
                                         )
                                       : UiUtils.getImage(
                                           height: 100,
@@ -233,7 +234,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     ],
                   ),
                   SizedBox(
-                    width: context.screenWidth * 0.04,
+                    width: context.screenWidth * 0.02,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -681,7 +682,7 @@ class _ProfileScreenState extends State<ProfileScreen>
           controller: profileScreenController,
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.all(18.0),
+            padding: const EdgeInsets.all(12.0),
             child: Column(children: <Widget>[
               profileHeader(),
               Column(
@@ -808,6 +809,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                             Navigator.pushNamed(
                               context,
                               Routes.blogsScreenRoute,
+                              arguments: {
+                                "catId":-1
+                              }
                             );
                           },
                           context: context);

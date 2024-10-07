@@ -89,7 +89,7 @@ class HomeRepository {
       };
 
       Map<String, dynamic> response =
-          await Api.get(url: Api.getItemApi, queryParameters: parameters);
+          await Api.get(url: Api.getServiceApi, queryParameters: parameters);
       List<ItemModel> items = (response['data']['data'] as List)
           .map((e) => ItemModel.fromJson(e))
           .toList();
@@ -122,6 +122,36 @@ class HomeRepository {
 
       Map<String, dynamic> response =
           await Api.get(url: Api.getItemApi, queryParameters: parameters);
+      List<ItemModel> items = (response['data']['data'] as List)
+          .map((e) => ItemModel.fromJson(e))
+          .toList();
+
+      return DataOutput(
+          total: response['data']['total'] ?? 0, modelList: items);
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+   Future<DataOutput<ItemModel>> fetchSectionServices(
+      {required int page,
+      required int sectionId,
+      String? country,
+      String? state,
+      String? city,
+      int? areaId}) async {
+    try {
+      Map<String, dynamic> parameters = {
+        "page": page,
+        "featured_section_id": sectionId,
+        if (city != null && city != "") 'city': city,
+        if (areaId != null && areaId != "") 'area_id': areaId,
+        if (country != null && country != "") 'country': country,
+        if (state != null && state != "") 'state': state,
+      };
+
+      Map<String, dynamic> response =
+          await Api.get(url: Api.getServiceApi, queryParameters: parameters);
       List<ItemModel> items = (response['data']['data'] as List)
           .map((e) => ItemModel.fromJson(e))
           .toList();

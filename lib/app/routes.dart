@@ -34,15 +34,18 @@ import '../Ui/screens/Blogs/blog_details.dart';
 import '../Ui/screens/Blogs/blogs_screen.dart';
 import '../Ui/screens/ItemHomeScreen/Widgets/subCategoryFilterScreen.dart';
 import '../Ui/screens/ItemHomeScreen/category_list.dart' as Item;
+import '../Ui/screens/Blogs/category_list.dart' as Blog;
 import '../Ui/screens/ServiceHomeScreen/category_list.dart' as Service;
 import '../Ui/screens/ItemHomeScreen/change_language_screen.dart';
 import '../Ui/screens/ItemHomeScreen/search_screen.dart' as Item;
 import '../Ui/screens/ServiceHomeScreen/search_screen.dart' as Service;
 import '../Ui/screens/Item/add_item_screen/Widgets/success_item_screen.dart';
+import '../Ui/screens/Service/add_item_screen/Widgets/success_item_screen.dart' as Service;
 import '../Ui/screens/Item/add_item_screen/select_category.dart' as Item;
 import '../Ui/screens/Service/add_item_screen/select_category.dart' as Service;
 import '../Ui/screens/Item/my_items_screen.dart';
 import '../Ui/screens/Item/viewAll.dart';
+import '../Ui/screens/Service/viewAll.dart' as Service;
 import '../Ui/screens/Location/areas_screen.dart';
 import '../Ui/screens/Location/nearby_location.dart';
 import '../Ui/screens/Onboarding/onboarding_screen.dart';
@@ -84,6 +87,7 @@ class Routes {
   static const addItem = 'addItem';
   static const waitingScreen = 'waitingScreen';
   static const categories = 'Categories';
+    static const blogs = 'Blogs';
    static const services = 'Services';
   static const addresses = 'address';
   static const chooseAdrs = 'chooseAddress';
@@ -111,6 +115,7 @@ class Routes {
   static const itemMapScreen = '/ItemMap';
   static const dashboard = '/dashboard';
   static const subCategoryScreen = '/subCategoryScreen';
+   static const ServiceSubCategoryScreen = '/ServiceSubCategoryScreen';
   static const categoryFilterScreen = '/categoryFilterScreen';
   static const subCategoryFilterScreen = '/subCategoryFilterScreen';
   static const postedSinceFilterScreen = '/postedSinceFilterScreen';
@@ -140,6 +145,7 @@ class Routes {
   static const selectOutdoorFacility = '/selectOutdoorFacility';
   static const adDetailsScreen = '/adDetailsScreen';
   static const successItemScreen = '/successItemScreen';
+    static const successServiceScreen = '/successServiceScreen';
    static const serviceDetailsScreen = '/serviceDetailsScreen';
 
   ///Add item screens
@@ -154,6 +160,7 @@ class Routes {
     static const addMoreServiceDetailsScreen = '/addMoreServiceDetailsScreen';
   static const confirmServiceLocationScreen = '/confirmServiceLocationScreen';
   static const sectionWiseItemsScreen = '/sectionWiseItemsScreen';
+    static const sectionWiseServicesScreen = '/sectionWiseServicesScreen';
   static const blockedUserListScreen = '/blockedUserListScreen';
   static const payStackWebViewScreen = '/payStackWebViewScreen';
 
@@ -221,13 +228,15 @@ class Routes {
         return MobileSignUpScreen.route(routeSettings);
       case completeProfile:
         return UserProfileScreen.route(routeSettings);
-
+      case blogs:
+        return Blog.CategoryList.route(routeSettings);
       case categories:
         return Item.CategoryList.route(routeSettings);
       case services:
         return Service.CategoryList.route(routeSettings);
       case subCategoryScreen:
         return SubCategoryScreen.route(routeSettings);
+ 
       case categoryFilterScreen:
         return CategoryFilterScreen.route(routeSettings);
       case subCategoryFilterScreen:
@@ -254,6 +263,9 @@ class Routes {
         return BlogsScreen.route(routeSettings);
       case successItemScreen:
         return SuccessItemScreen.route(routeSettings);
+
+              case successServiceScreen:
+        return Service.SuccessItemScreen.route(routeSettings);
 
       case blogDetailsScreenRoute:
         return BlogDetails.route(routeSettings);
@@ -320,6 +332,10 @@ class Routes {
         return Service.ConfirmLocationScreen.route(routeSettings);
       case sectionWiseItemsScreen:
         return SectionItemsScreen.route(routeSettings);
+
+
+              case sectionWiseServicesScreen:
+        return Service.SectionItemsScreen.route(routeSettings);
 
       case adDetailsScreen:
         return AdDetailsScreen.route(routeSettings);

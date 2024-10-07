@@ -1,4 +1,4 @@
-import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
+import 'package:eClassify/Ui/screens/ServiceHomeScreen/home_screen.dart';
 import 'package:eClassify/utils/AppIcon.dart';
 import 'package:eClassify/utils/hive_utils.dart';
 import 'package:eClassify/utils/ui_utils.dart';
@@ -306,21 +306,21 @@ class _MyItemTabState extends CloudState<MyItemTab> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
+                                        Text(item.name ?? "")
+                                            .setMaxLines(lines: 2)
+                                            .firstUpperCaseWidget(),
                                         Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            Text("${Constant.currencySymbol}\t${item.price}")
-                                                .color(context
-                                                    .color.territoryColor)
-                                                .bold(),
-                                            Spacer(),
+                                            // Text("${Constant.currencySymbol}\t${item.price}")
+                                            //     .color(context
+                                            //         .color.territoryColor)
+                                            //     .bold(),
+                                            // Spacer(),
                                             showStatus(item)
                                           ],
                                         ),
                                         //SizedBox(height: 7,),
-                                        Text(item.name ?? "")
-                                            .setMaxLines(lines: 2)
-                                            .firstUpperCaseWidget(),
                                         //SizedBox(height: 12,),
                                         Row(
                                           //mainAxisAlignment: MainAxisAlignment.spaceAround,

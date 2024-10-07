@@ -1,5 +1,6 @@
 import 'package:eClassify/Ui/screens/widgets/AnimatedRoutes/blur_page_route.dart'
     show BlurredRouter;
+import 'package:eClassify/data/cubits/category/blogs/fetch_blog_category_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../data/model/blog_model.dart';
@@ -16,13 +17,18 @@ import '../widgets/shimmerLoadingContainer.dart';
 import 'widgets/category_widget_home.dart';
 
 class BlogsScreen extends StatefulWidget {
-  const BlogsScreen({super.key});
+  final int? catId;
+  const BlogsScreen({
+    super.key,
+    required this.catId,
+  });
 
   static Route route(RouteSettings settings) {
+    Map? args = settings.arguments as Map?;
     return BlurredRouter(
-      builder: (context) {
-        return const BlogsScreen();
-      },
+      builder: (_) => BlogsScreen(
+        catId: args?['catId'],
+      ),
     );
   }
 
@@ -36,15 +42,20 @@ class _BlogsScreenState extends State<BlogsScreen> {
   @override
   void initState() {
     AdHelper.loadInterstitialAd();
-    context.read<FetchBlogsCubit>().fetchBlogs();
+    context.read<FetchBlogCategoryCubit>().fetchCategories();
+    context.read<FetchBlogsCubit>().fetchBlogs(widget.catId!);
     _pageScrollController.addListener(pageScrollListen);
     super.initState();
+  }
+
+  void getBlogs() {
+    context.read<FetchBlogsCubit>().fetchBlogs(widget.catId!);
   }
 
   void pageScrollListen() {
     if (_pageScrollController.isEndReached()) {
       if (context.read<FetchBlogsCubit>().hasMoreData()) {
-        context.read<FetchBlogsCubit>().fetchBlogsMore();
+        context.read<FetchBlogsCubit>().fetchBlogsMore(widget.catId!);
       }
     }
   }
@@ -61,7 +72,8 @@ class _BlogsScreenState extends State<BlogsScreen> {
     return RefreshIndicator(
       color: context.color.territoryColor,
       onRefresh: () async {
-        context.read<FetchBlogsCubit>().fetchBlogs();
+        context.read<FetchBlogCategoryCubit>().fetchCategories();
+        context.read<FetchBlogsCubit>().fetchBlogs(widget.catId!);
       },
       child: Scaffold(
         backgroundColor: context.color.primaryColor,
@@ -77,7 +89,7 @@ class _BlogsScreenState extends State<BlogsScreen> {
                 if (state.errorMessage.error == "no-internet") {
                   return NoInternet(
                     onRetry: () {
-                      context.read<FetchBlogsCubit>().fetchBlogs();
+                      context.read<FetchBlogsCubit>().fetchBlogs(widget.catId!);
                     },
                   );
                 }
@@ -91,15 +103,19 @@ class _BlogsScreenState extends State<BlogsScreen> {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                   const CategoryWidgetHome(),
                   Expanded(
                     child: ListView.builder(
                         controller: _pageScrollController,
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.all(16),
-                        itemCount: state.blogModel.length,
+                        itemCount: state.blogModel.length + 1,
                         itemBuilder: (context, index) {
+                          if (index == 0) {
+                            // return the header
+                            return const CategoryWidgetHome();
+                          }
+                          index -= 1;
                           BlogModel blog = state.blogModel[index];
 
                           return buildBlogCard(context, blog);
@@ -147,8 +163,7 @@ class _BlogsScreenState extends State<BlogsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(12.0, 12, 12, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 12, 12, 0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: UiUtils.getImage(
@@ -160,8 +175,7 @@ class _BlogsScreenState extends State<BlogsScreen> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(12.0, 12, 12, 6),
+                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 12, 12, 6),
                 child: Text(
                   (blog.title ?? "").firstUpperCase(),
                 )
@@ -259,5 +273,4 @@ class _BlogsScreenState extends State<BlogsScreen> {
           );
         });
   }
-
 }

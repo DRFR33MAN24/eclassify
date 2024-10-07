@@ -27,11 +27,14 @@ class CategoryWidgetHome extends StatelessWidget {
                 child: LayoutBuilder(
   builder: (context, constraints) {
     int crossAxisCount = 4; // Number of columns
-    double itemHeight = 40.0; // Height of each item
+    double itemHeight = 70.0; // Height of each item
     double itemSpacing = 10.0; // Spacing between items
 
+    // Limit the number of categories to a maximum of 10
+    int displayCount = state.categories.length > 12 ? 12 : state.categories.length;
+    
     // Calculate the number of rows
-    int rowCount = (state.categories.length + 1) ~/ crossAxisCount +4;
+    int rowCount = (displayCount + 1) ~/ crossAxisCount +1; // +1 for the "moreCategory" widget
     
     // Calculate total height: rows * itemHeight + spacing between rows
     double gridHeight = (rowCount * itemHeight) + ((rowCount - 1) * itemSpacing);
@@ -45,12 +48,12 @@ class CategoryWidgetHome extends StatelessWidget {
           crossAxisCount: crossAxisCount,
           crossAxisSpacing: itemSpacing,
           mainAxisSpacing: itemSpacing,
-          childAspectRatio: 0.8, // Adjust this ratio to fit your design
+          childAspectRatio: 1, // Adjust this ratio to fit your design
         ),
-        itemCount: state.categories.length + 1,
+        itemCount: displayCount + 1, // Limit to 10 items + 1 for "moreCategory"
         itemBuilder: (context, index) {
-          if (index == state.categories.length) {
-            return moreCategory(context);
+          if (index == displayCount) {
+            return moreCategory(context); // "See more" button
           } else {
             return CategoryHomeCard(
               title: state.categories[index].name!,
@@ -152,10 +155,10 @@ class CategoryWidgetHome extends StatelessWidget {
 
   Widget moreCategory(BuildContext context) {
     return SizedBox(
-      width: 70,
+      width: 60,
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, Routes.categories,
+          Navigator.pushNamed(context, Routes.services,
               arguments: {"from": Routes.home}).then(
             (dynamic value) {
               if (value != null) {
@@ -166,21 +169,22 @@ class CategoryWidgetHome extends StatelessWidget {
           );
         },
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(20),
           child: Column(
             children: [
               Container(
                 clipBehavior: Clip.antiAlias,
-                height: 70,
+                height: 60,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(
-                      color: context.color.borderColor.darken(60), width: 1),
+                    borderRadius: BorderRadius.circular(20),
+                
+                 
                   color: context.color.secondaryColor,
                 ),
                 child: Center(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(20),
+               
                     child: SizedBox(
                       // color: Colors.blue,
                       width: 48,
@@ -195,17 +199,17 @@ class CategoryWidgetHome extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: Text("more".translate(context))
-                    .centerAlign()
-                    .setMaxLines(lines: 2)
-                    .size(context.font.smaller)
-                    .color(
-                      context.color.textDefaultColor,
-                    ),
-              ))
+              // Expanded(
+              //     child: Padding(
+              //   padding: const EdgeInsets.all(0.0),
+              //   child: Text("more".translate(context))
+              //       .centerAlign()
+              //       .setMaxLines(lines: 2)
+              //       .size(context.font.smaller)
+              //       .color(
+              //         context.color.textDefaultColor,
+              //       ),
+              // ))
             ],
           ),
         ),

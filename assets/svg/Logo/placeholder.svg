@@ -1,14 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="250" height="147" viewBox="0 0 250 147">
-  <g id="placeholder" transform="translate(12595 5840)">
-    <rect id="image" width="250" height="147" transform="translate(-12595 -5840)" fill="none"/>
-    <g id="mainlogo" transform="translate(-12521 -5817)" opacity="0.33">
-      <rect id="logoback" width="102" height="102" fill="none"/>
-      <g id="logo" transform="translate(36.12 4.121)">
-        <rect id="back" width="102" height="102" transform="translate(-36.12 -4.121)" fill="none"/>
-        <path id="Path_16339" data-name="Path 16339" d="M5.423,243.619a5.422,5.422,0,0,1-4.229-8.813L10.832,222.8a5.424,5.424,0,0,1,8.464,6.784L9.659,241.589a5.415,5.415,0,0,1-4.235,2.03Z" transform="translate(-23.714 -148.548)" fill="#00b2ca"/>
-        <path id="Path_16340" data-name="Path 16340" d="M94.4,100.084a19.067,19.067,0,1,1,14.531-31.424,4.063,4.063,0,0,1-.312,5.6l-7.538,7.075a4.067,4.067,0,1,1-5.572-5.926l4.208-3.951a10.935,10.935,0,1,0,3.038,16.62,4.067,4.067,0,0,1,6.209,5.256,19.062,19.062,0,0,1-14.568,6.75Z" transform="translate(-73.491 -43.542)" fill="#fa6e53"/>
-        <path id="Path_16341" data-name="Path 16341" d="M52.543,79.723a39.862,39.862,0,1,1,30.381-65.7,5.425,5.425,0,0,1-8.264,7.031A29.021,29.021,0,1,0,74.71,58.6a5.424,5.424,0,0,1,8.281,7.007A39.849,39.849,0,0,1,52.539,79.72Z" transform="translate(-32.073 -2.583)" fill="#00b2ca"/>
-      </g>
-    </g>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 6679 6899" style="enable-background:new 0 0 6679 6899;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#FDD917;}
+</style>
+<g>
+	<g>
+		<path class="st0" d="M5599.54,3145.42c-9.92,579.35-237.88,1105.48-605.36,1500.06l-149.62,146.58l-1.87,1.77L3306.5,6298
+			L1800.75,4760.05l-0.88-0.79l-145.01-148.15c-357.27-399.58-574.44-927.09-574.44-1505.36
+			c0-1236.74,993.56-2241.49,2226.08-2259.46v862l0,0c-794.06,0-1404.14,643.75-1404.14,1437.81s643.75,1437.81,1437.81,1437.81
+			s1437.81-643.75,1437.81-1437.81v-0.69H5599.54z"/>
+		<polygon class="st1" points="5577.54,846 5577.54,2570.59 4717.8,2570.59 4717.8,1705.74 3863.07,1705.74 3863.07,846 		"/>
+	</g>
+	<circle class="st0" cx="3339.98" cy="3110.77" r="892.16"/>
+</g>
 </svg>

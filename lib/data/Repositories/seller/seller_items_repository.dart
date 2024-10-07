@@ -20,4 +20,22 @@ class SellerItemsRepository {
       rethrow;
     }
   }
+
+    Future<DataOutput<ItemModel>> fetchSellerServicesAllServices(
+      {required int page, required int sellerId}) async {
+    try {
+      Map<String, dynamic> parameters = {"page": page, "user_id": sellerId};
+
+      Map<String, dynamic> response =
+          await Api.get(url: Api.getServiceApi, queryParameters: parameters);
+      List<ItemModel> items = (response['data']['data'] as List)
+          .map((e) => ItemModel.fromJson(e))
+          .toList();
+
+      return DataOutput(
+          total: response['data']['total'] ?? 0, modelList: items);
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

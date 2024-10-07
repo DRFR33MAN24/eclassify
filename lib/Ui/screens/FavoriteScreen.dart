@@ -10,6 +10,7 @@ import '../../data/cubits/favorite/favoriteCubit.dart';
 import '../../data/helper/designs.dart';
 import '../../data/model/item/item_model.dart';
 import 'ItemHomeScreen/Widgets/item_horizontal_card.dart';
+import 'ServiceHomeScreen/Widgets/item_horizontal_card.dart' as Service;
 import 'widgets/AnimatedRoutes/blur_page_route.dart';
 import 'widgets/Errors/no_data_found.dart';
 import 'widgets/Errors/no_internet.dart';
@@ -35,9 +36,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
   late final ScrollController _controller = ScrollController()
     ..addListener(
       () {
-
         if (_controller.offset >= _controller.position.maxScrollExtent) {
-
           if (context.read<FavoriteCubit>().hasMoreFavorite()) {
             setState(() {});
             context.read<FavoriteCubit>().getMoreFavorite();
@@ -106,22 +105,41 @@ class FavoriteScreenState extends State<FavoriteScreen> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         ItemModel item = state.favorite[index];
-                        return InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              Routes.adDetailsScreen,
-                              arguments: {
-                                'model': item,
-                              },
-                            );
-                          },
-                          child: ItemHorizontalCard(
-                            item: item,
-                            showLikeButton: true,
-                            additionalImageWidth: 8,
-                          ),
-                        );
+                        if (item.type == 'item') {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.adDetailsScreen,
+                                arguments: {
+                                  'model': item,
+                                },
+                              );
+                            },
+                            child: ItemHorizontalCard(
+                              item: item,
+                              showLikeButton: true,
+                              additionalImageWidth: 8,
+                            ),
+                          );
+                        } else {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.serviceDetailsScreen,
+                                arguments: {
+                                  'model': item,
+                                },
+                              );
+                            },
+                            child: Service.ItemHorizontalCard(
+                              item: item,
+                              showLikeButton: true,
+                              additionalImageWidth: 8,
+                            ),
+                          );
+                        }
                       },
                     ),
                   ),

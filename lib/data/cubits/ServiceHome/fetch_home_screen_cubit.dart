@@ -1,4 +1,4 @@
-import 'package:eClassify/data/Repositories/Home/home_repository.dart';
+import 'package:eClassify/data/Repositories/ServiceHome/home_repository.dart';
 import 'package:eClassify/data/model/Home/home_screen_section.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 

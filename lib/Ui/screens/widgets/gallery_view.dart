@@ -67,6 +67,7 @@ class _GalleryViewWidgetState extends State<GalleryViewWidget> {
                         AppIcons.placeHolder,
                         width: 70,
                         height: 70,
+                        color: Colors.white
                       ),
                     ),
                   );

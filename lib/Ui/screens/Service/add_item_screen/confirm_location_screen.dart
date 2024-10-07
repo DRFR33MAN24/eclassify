@@ -355,7 +355,7 @@ class _ConfirmLocationScreenState extends CloudState<ConfirmLocationScreen>
         myAdsCubitReference[getCloudData("edit_from")]?.edit(state.model);
         Future.delayed(Duration(milliseconds: 500), () {
           if (mounted) {
-            Navigator.pushNamed(context, Routes.successItemScreen,
+            Navigator.pushNamed(context, Routes.successServiceScreen,
                 arguments: {'model': state.model, 'isEdit': widget.isEdit});
           }
         });

@@ -39,7 +39,7 @@ import 'Userprofile/profile_screen.dart';
 import 'chat/chat_list_screen.dart';
 
 import 'ItemHomeScreen/home_screen.dart' as ItemsUI;
-import 'package:eClassify/Ui/screens/ServiceHomeScreen/home_screen.dart' as ServicesUI;
+import 'ServiceHomeScreen/home_screen.dart' as ServicesUI;
 import 'widgets/blurred_dialoge_box.dart';
 
 List<ItemModel> myItemlist = [];
@@ -468,9 +468,17 @@ class MainActivityState extends State<MainActivity>
         child: InkWell(
           highlightColor: Colors.transparent,
           splashColor: Colors.transparent,
-          onTap: () =>             pageCntrlr.animateToPage(5,
+          onTap: () {
+                UiUtils.checkUser(
+          onNotGuest: () {
+ 
+pageCntrlr.animateToPage(5,
                 duration: const Duration(milliseconds: 400),
-                curve: Curves.easeInOut),
+                curve: Curves.easeInOut);
+          },
+          context: context);
+            
+          }            ,
           child:  UiUtils.getSvg(
                   AppIcons.chatNav,
                 ),
@@ -545,12 +553,12 @@ class MainActivityState extends State<MainActivity>
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      UiUtils.getSvg(AppIcons.adsNav,color: context.color.onTertiary),
+                                      UiUtils.getSvg(AppIcons.adsNav,color: context.color.onTertiary,height: 24,width: 24),
                                       SizedBox(
                                         width: 7.rw(context),
                                       ),
                                       Text(UiUtils.getTranslatedLabel(
-                                              context, "ADs"))
+                                              context, "AD"))
                                           .color(context.color.buttonColor),
                                     ],
                                   )),
@@ -596,7 +604,7 @@ class MainActivityState extends State<MainActivity>
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    UiUtils.getSvg(AppIcons.serviceNav,color: context.color.onTertiary),
+                                    UiUtils.getSvg(AppIcons.serviceNav,color: context.color.onTertiary,width: 24,height: 24),
                                     SizedBox(
                                       width: 7.rw(context),
                                     ),
@@ -645,7 +653,7 @@ class MainActivityState extends State<MainActivity>
       }
     }
     searchbody = {};
-    if (index == 1 || index == 2) {
+    if (index == 2) {
       UiUtils.checkUser(
           onNotGuest: () {
             currtab = index;
@@ -718,12 +726,12 @@ class MainActivityState extends State<MainActivity>
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              buildBottomNavigationbarItem(0, AppIcons.homeNav,
-                  AppIcons.homeNavActive, "adsTab".translate(context)),
+              buildBottomNavigationbarItem(0, AppIcons.adsNav,
+                  AppIcons.adsNavActive, "adsTab".translate(context)),
               // buildBottomNavigationbarItem(1, AppIcons.chatNav,
               //     AppIcons.chatNavActive, "chat".translate(context)),
-                                              buildBottomNavigationbarItem(1, AppIcons.myAdsNav,
-                  AppIcons.myAdsNavActive, "servicesTab".translate(context)),
+                                              buildBottomNavigationbarItem(1, AppIcons.serviceNav,
+                  AppIcons.serviceNavActive, "servicesTab".translate(context)),
               Transform(
                 transform: Matrix4.identity()..translate(0.toDouble(), -20),
                 child: GestureDetector(
@@ -754,7 +762,7 @@ class MainActivityState extends State<MainActivity>
                 ),
               ),
               buildBottomNavigationbarItem(2, AppIcons.myAdsNav,
-                  AppIcons.myAdsNavActive, "myContentTab".translate(context)),
+                  AppIcons.myAdsNavActive, "myContent".translate(context)),
 
               buildBottomNavigationbarItem(3, AppIcons.profileNav,
                   AppIcons.profileNavActive, "profileTab".translate(context))
@@ -781,10 +789,10 @@ class MainActivityState extends State<MainActivity>
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (currtab == index) ...{
-                UiUtils.getSvg(activeSvg),
+                UiUtils.getSvg(activeSvg,height: 20,width: 20),
               } else ...{
                 UiUtils.getSvg(svgImage,
-                    color: context.color.textLightColor.darken(30)),
+                    color: context.color.textLightColor.darken(30),height: 20,width: 20),
               },
               Text(
                 title,

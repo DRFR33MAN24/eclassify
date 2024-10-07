@@ -3,9 +3,10 @@ import '../model/blog_model.dart';
 import '../model/data_output.dart';
 
 class BlogsRepository {
-  Future<DataOutput<BlogModel>> fetchBlogs({required int page}) async {
+  Future<DataOutput<BlogModel>> fetchBlogs({required int page,required int catId}) async {
     Map<String, dynamic> parameters = {
       Api.page: page,
+      "catId":catId
     };
 
     Map<String, dynamic> result =

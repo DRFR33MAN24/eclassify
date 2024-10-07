@@ -5,6 +5,7 @@ import 'package:eClassify/data/cubits/Location/fetch_cities_cubit.dart';
 import 'package:eClassify/data/cubits/Location/fetch_countries_cubit.dart';
 import 'package:eClassify/data/cubits/Location/fetch_states_cubit.dart';
 import 'package:eClassify/data/cubits/auth/delete_user_cubit.dart';
+import 'package:eClassify/data/cubits/category/blogs/fetch_blog_category_cubit.dart';
 import 'package:eClassify/data/cubits/category/items/fetch_sub_categories_cubit.dart';
 import 'package:eClassify/data/cubits/chatCubits/block_user_cubit.dart';
 import 'package:eClassify/data/cubits/chatCubits/blocked_users_list_cubit.dart';
@@ -15,6 +16,7 @@ import 'package:eClassify/data/cubits/fetch_faqs_cubit.dart';
 import 'package:eClassify/data/cubits/item/search_item_cubit.dart';
 import 'package:eClassify/data/cubits/safety_tips_cubit.dart';
 import 'package:eClassify/data/cubits/seller/fetch_seller_item_cubit.dart';
+import 'package:eClassify/data/cubits/seller/fetch_seller_service_cubit.dart';
 import 'package:eClassify/data/cubits/seller/fetch_seller_ratings_cubit.dart';
 import 'package:eClassify/data/cubits/seller/send_verification_field_cubit.dart';
 import 'package:eClassify/data/cubits/subscription/fetch_featured_subscription_packages_cubit.dart';
@@ -39,6 +41,7 @@ import '../data/cubits/item/delete_item_cubit.dart';
 import '../data/cubits/item/fetch_my_item_cubit.dart';
 import '../data/cubits/item/item_total_click_cubit.dart';
 import '../data/cubits/item/related_item_cubit.dart';
+import '../data/cubits/service/related_item_cubit.dart' as Service;
 import '../data/cubits/seller/fetch_seller_verification_field.dart';
 import '../data/cubits/seller/fetch_verification_request_cubit.dart';
 import '../data/cubits/subscription/In_app_purchase_cubit.dart';
@@ -82,6 +85,8 @@ class RegisterCubits {
     BlocProvider(create: (context) => SliderCubit()),
     BlocProvider(create: (context) => CompanyCubit()),
     BlocProvider(create: (context) => FetchCategoryCubit()),
+    BlocProvider(create: (context) => FetchBlogCategoryCubit()),
+    BlocProvider(create: (context) => FetchServiceCategoryCubit()),
     BlocProvider(create: (context) => ProfileSettingCubit()),
     BlocProvider(create: (context) => NotificationCubit()),
     BlocProvider(create: (context) => AppThemeCubit()),
@@ -116,6 +121,7 @@ class RegisterCubits {
     BlocProvider(create: (context) => Service.FetchSectionItemsCubit()),
     BlocProvider(create: (context) => ItemReportCubit()),
     BlocProvider(create: (context) => FetchRelatedItemsCubit()),
+     BlocProvider(create: (context) => Service.FetchRelatedItemsCubit()),
     BlocProvider(create: (context) => Item.FetchPopularItemsCubit()),
     BlocProvider(create: (context) => Service.FetchPopularItemsCubit()),
     BlocProvider(create: (context) => Item.SearchItemCubit()),
@@ -147,6 +153,7 @@ class RegisterCubits {
     BlocProvider(create: (context) => FetchFaqsCubit()),
     BlocProvider(create: (context) => GetItemBuyerListCubit()),
     BlocProvider(create: (context) => FetchSellerItemsCubit()),
+        BlocProvider(create: (context) => FetchSellerServicesCubit()),
     BlocProvider(create: (context) => AddItemReviewCubit()),
     BlocProvider(create: (context) => FetchSellerRatingsCubit()),
     BlocProvider(create: (context) => FetchSellerVerificationFieldsCubit()),

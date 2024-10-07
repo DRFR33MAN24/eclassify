@@ -809,7 +809,13 @@ class _ChatScreenState extends State<ChatScreen>
                                 Padding(
                                   padding:
                                       EdgeInsetsDirectional.only(start: 15.0),
-                                  child: Text(
+                                  child:widget.itemPrice==0? Text(
+                                   "free".translate(context), // Replace with your item price
+                                  )
+                                      .color(context.color.textDefaultColor)
+                                      .size(context.font.large)
+                                      .bold():
+                                      Text(
                                     Constant.currencySymbol.toString() +
                                         widget.itemPrice
                                             .toString(), // Replace with your item price
@@ -1258,11 +1264,16 @@ class _ChatScreenState extends State<ChatScreen>
 
                   /*  Text("yourOffer".translate(context))
                   .color(context.color.textDefaultColor.withOpacity(0.5)),*/
-                  Text(Constant.currencySymbol +
+                 widget.itemOfferPrice==0? Text("free".translate(context))
+                      .bold()
+                      .size(context.font.larger)
+                      .color(context.color.textDefaultColor):
+                      Text(Constant.currencySymbol +
                           widget.itemOfferPrice.toString())
                       .bold()
                       .size(context.font.larger)
                       .color(context.color.textDefaultColor)
+
                 ],
               )),
         );
@@ -1288,7 +1299,11 @@ class _ChatScreenState extends State<ChatScreen>
                 children: [
                   Text("offerLbl".translate(context))
                       .color(context.color.textDefaultColor.withOpacity(0.5)),
-                  Text(Constant.currencySymbol +
+                widget.itemOfferPrice==0?   Text("free".translate(context))
+                      .bold()
+                      .size(context.font.larger)
+                      .color(context.color.textDefaultColor):
+                      Text(Constant.currencySymbol +
                           widget.itemOfferPrice.toString())
                       .bold()
                       .size(context.font.larger)

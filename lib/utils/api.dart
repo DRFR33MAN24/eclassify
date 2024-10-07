@@ -68,6 +68,7 @@ class Api {
   static String updateProfileApi = "update-profile";
   static String getSliderApi = "get-slider";
   static String getCategoriesApi = "get-categories";
+    static String getBlogCategoriesApi = "get-blogs-categories";
   static String getServicesCategoriesApi = "get-services-categories";
   static String getItemApi = "get-item";
   static String getMyItemApi = "my-items";
@@ -85,6 +86,7 @@ class Api {
   static String addReportsApi = "add-reports";
   static String getCustomFieldsApi = "get-customfields";
   static String getFeaturedSectionApi = "get-featured-section";
+   static String getServicesFeaturedSectionApi = "get-services-featured-section";
   static String updateItemApi = "update-item";
   static String addItemApi = "add-item";
   static String addServiceApi = "add-service";

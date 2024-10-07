@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../Repositories/Item/item_repository.dart';
+import '../../Repositories/Service/item_repository.dart';
 import '../../model/data_output.dart';
 import '../../model/item/item_model.dart';
 

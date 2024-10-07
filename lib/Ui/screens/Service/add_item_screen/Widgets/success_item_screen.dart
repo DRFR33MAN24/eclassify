@@ -154,8 +154,8 @@ class _SuccessItemScreenState extends State<SuccessItemScreen>
                                     .bold(weight: FontWeight.w600),
                               SizedBox(height: 18),
                               Text(widget.isEdit
-                                      ? 'updatedSuccess'.translate(context)
-                                      : 'submittedSuccess'.translate(context))
+                                      ? 'submittedServiceSuccess'.translate(context)
+                                      : 'submittedServiceSuccess'.translate(context))
                                   .centerAlign()
                                   .size(context.font.larger)
                                   .color(context.color.textDefaultColor),
@@ -188,7 +188,7 @@ class _SuccessItemScreenState extends State<SuccessItemScreen>
                                       border: Border.all(
                                           color: context.color.territoryColor),
                                       color: context.color.secondaryColor),
-                                  child: Text("previewAd".translate(context))
+                                  child: Text("previewService".translate(context))
                                       .centerAlign()
                                       .size(context.font.larger)
                                       .color(context.color.territoryColor),

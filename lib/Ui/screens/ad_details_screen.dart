@@ -284,7 +284,7 @@ class AdDetailsScreenState extends CloudState<AdDetailsScreen> {
                         : 15),
                 child: IconButton(
                   onPressed: () {
-                    HelperUtils.share(context, model.id!);
+                    HelperUtils.share(context, model.id!,model.type!);
                   },
                   icon: Icon(
                     Icons.share,

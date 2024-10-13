@@ -172,8 +172,11 @@ class HelperUtils {
   static String nativeDeepLinkUrlOfItem(int itemId) {
     return "https://${AppSettings.shareNavigationWebUrl}/items-details/$itemId";
   }
+    static String nativeDeepLinkUrlOfService(int itemId) {
+    return "https://${AppSettings.shareNavigationWebUrl}/services-details/$itemId";
+  }
 
-  static void share(BuildContext context, int itemId) {
+  static void share(BuildContext context, int itemId,String type) {
     showModalBottomSheet(
       context: context,
       backgroundColor: context.color.backgroundColor,
@@ -187,7 +190,8 @@ class HelperUtils {
               onTap: () async {
                 String deepLink = "";
                 if (AppSettings.deepLinkingType == DeepLinkType.native) {
-                  deepLink = nativeDeepLinkUrlOfItem(itemId);
+                type=="item"?  deepLink = nativeDeepLinkUrlOfItem(itemId):
+                deepLink = nativeDeepLinkUrlOfService(itemId);
                 }
                 /*else {
                   deepLink = await DeepLinkManager.buildDynamicLink(itemId);
@@ -218,7 +222,7 @@ class HelperUtils {
                 final box = context.findRenderObject() as RenderBox?;
 
                 String text =
-                    "Exciting find! 🏡 Check out this amazing item I came across.  Let me know what you think! ⭐\n Here are the details:\n$deepLink.";
+                    "shareLinkText".translate(context)+"\n$deepLink";
                 await Share.share(text,sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
               },
             ),

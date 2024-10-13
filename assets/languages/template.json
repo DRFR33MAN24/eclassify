@@ -592,11 +592,12 @@
   "Sunday":"Sunday",
   "Wednesday":"Wednesday",
   "service":"Service",
-  "all":"all",
+  "all":"All",
   "Status":"Status",
   "previewService":"previewService",
   "submittedServiceSuccess": "Your Service \n Submitted Successfully",
   "liveServices":"live Services",
-  "serviceLive":"live Services"
+  "serviceLive":"live Services",
+  "shareLinkText":"Exciting find! 🏡 Check out this amazing item I came across.  Let me know what you think! ⭐\n Here are the details:"
 
 }

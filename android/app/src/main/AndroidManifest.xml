@@ -101,6 +101,29 @@
 
             </intent-filter>
 
+                        <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+               <!-- <data
+                    android:host="eclassify.thewrteam.in"
+                    android:pathPattern="/.."
+                    android:scheme="http" />
+                <data android:pathPattern="/items-details/.*" />
+                <data android:scheme="https" />-->
+
+                <data
+                    android:host="aldalil.eu"
+                    android:pathPattern="/.."
+                    android:scheme="http" />
+                <data android:pathPattern="/services-details/.*" />
+                <data android:scheme="https" />
+
+
+            </intent-filter>
+
 
             <!-- <intent-filter android:autoVerify="true">
                  <action android:name="android.intent.action.VIEW" />

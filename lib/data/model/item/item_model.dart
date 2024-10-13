@@ -10,6 +10,7 @@ class ItemModel {
   String? name;
   String? slug;
   String? description;
+  String? serviceType;
   int? price;
   String? image;
   dynamic watermarkimage;
@@ -78,6 +79,7 @@ class ItemModel {
       this.slug,
       this.category,
       this.description,
+      this.serviceType,
       this.price,
       this.image,
       this.watermarkimage,
@@ -122,6 +124,7 @@ class ItemModel {
       String? name,
       String? slug,
       String? description,
+      String? serviceType,
       int? price,
       String? image,
       dynamic watermarkimage,
@@ -163,6 +166,7 @@ class ItemModel {
       slug: slug ?? this.slug,
       category: category ?? this.category,
       description: description ?? this.description,
+      serviceType: serviceType?? this.serviceType,
       price: price ?? this.price,
       image: image ?? this.image,
       watermarkimage: watermarkimage ?? this.watermarkimage,
@@ -222,6 +226,7 @@ class ItemModel {
     totalLikes = json['total_likes'];
     views = json['clicks'];
     description = json['description'];
+    serviceType = json['service_type'];
 
     image = json['image'];
     watermarkimage = json['watermark_image'];
@@ -292,6 +297,7 @@ class ItemModel {
     data['name'] = name;
     data['slug'] = slug;
     data['description'] = description;
+    data['service_type']= serviceType;
     data['price'] = price;
     data['total_likes'] = totalLikes;
     data['clicks'] = views;
@@ -349,7 +355,7 @@ class ItemModel {
 
   @override
   String toString() {
-    return 'ItemModel{id: $id, name: $name,slug:$slug, description: $description, price: $price, image: $image, watermarkimage: $watermarkimage, latitude: $latitude, longitude: $longitude, address: $address, contact: $contact, total_likes: $totalLikes,isLiked: $isLike, isFeature: $isFeature,views: $views, type: $type, status: $status, active: $active, videoLink: $videoLink, user: $user, galleryImages: $galleryImages,itemOffers:$itemOffers, category: $category, customFields: $customFields,createdAt:$created,itemType:$itemType,userId:$userId,categoryId:$categoryId,isAlreadyOffered:$isAlreadyOffered,isAlreadyReported:$isAlreadyReported,allCategoryId:$allCategoryIds,rejected_reason:$rejectedReason,area_id:$areaId,area:$area,city:$city,state:$state,country:$country,is_purchased:$isPurchased,review:$review}';
+    return 'ItemModel{id: $id, name: $name,slug:$slug, description: $description,serviceType:$serviceType, price: $price, image: $image, watermarkimage: $watermarkimage, latitude: $latitude, longitude: $longitude, address: $address, contact: $contact, total_likes: $totalLikes,isLiked: $isLike, isFeature: $isFeature,views: $views, type: $type, status: $status, active: $active, videoLink: $videoLink, user: $user, galleryImages: $galleryImages,itemOffers:$itemOffers, category: $category, customFields: $customFields,createdAt:$created,itemType:$itemType,userId:$userId,categoryId:$categoryId,isAlreadyOffered:$isAlreadyOffered,isAlreadyReported:$isAlreadyReported,allCategoryId:$allCategoryIds,rejected_reason:$rejectedReason,area_id:$areaId,area:$area,city:$city,state:$state,country:$country,is_purchased:$isPurchased,review:$review}';
   }
 }
 

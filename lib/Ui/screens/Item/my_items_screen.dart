@@ -81,7 +81,7 @@ class MyItemState extends State<ItemsScreen> with TickerProviderStateMixin {
         backgroundColor: context.color.primaryColor,
         appBar: UiUtils.buildAppBar(
           context,
-          title: "myAds".translate(context),
+          title: "myContent".translate(context),
           // bottomHeight: 49,
           bottomHeight: 100,
 
@@ -165,7 +165,7 @@ class MyItemState extends State<ItemsScreen> with TickerProviderStateMixin {
               return BlocProvider(
                 create: (context) => item.FetchMyItemsCubit(),
                 child: Builder(builder: (context) {
-              
+                  print("dbg ${section['status']}");
                     return item.MyItemTab(
                     //getActiveItems: section['active'],
                     getItemsWithStatus: section['status'],
@@ -178,7 +178,7 @@ class MyItemState extends State<ItemsScreen> with TickerProviderStateMixin {
               return BlocProvider(
                 create: (context) => service.FetchMyItemsCubit(),
                 child: Builder(builder: (context) {
-              
+               print("dbg ${section['status']}");
                     return service.MyItemTab(
                     //getActiveItems: section['active'],
                     getItemsWithStatus: section['status'],

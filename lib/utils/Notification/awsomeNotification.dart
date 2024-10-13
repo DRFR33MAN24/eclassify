@@ -237,7 +237,7 @@ class NotificationController {
                     date: date ?? "",
                     itemOfferId: int.parse(itemOfferId!),
                     itemPrice: int.parse(itemPrice!),
-                    itemOfferPrice: itemOfferPrice != null
+                    itemOfferPrice: (itemOfferPrice != null && itemOfferPrice!.isNotEmpty)
                         ? int.parse(itemOfferPrice.toString())
                         : null,
                     buyerId: HiveUtils.getUserId(),

@@ -11,8 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../utils/ui_utils.dart';
 import '../../../../app/app_theme.dart';
 import '../../../../data/Repositories/favourites_repository.dart';
-import '../../../../data/cubits/ServiceFavorite/favoriteCubit.dart';
-import '../../../../data/cubits/ServiceFavorite/manageFavCubit.dart';
+import '../../../../data/cubits/favorite/favoriteCubit.dart';
+import '../../../../data/cubits/favorite/manageFavCubit.dart';
 import '../../../../data/cubits/system/app_theme_cubit.dart';
 import '../../../../utils/constant.dart';
 
@@ -195,17 +195,48 @@ class ItemHorizontalCard extends StatelessWidget {
                               Row(
                                 children: [
                                   Expanded(
-                                    child:    Text(
-                                item.name!.firstUpperCase(),
-                              )
-                                  .setMaxLines(lines: 2)
-                                  .size(context.font.normal)
-                                  .color(context.color.textDefaultColor),
+                                    child: Text(
+                                      item.name!.firstUpperCase(),
+                                    )
+                                        .setMaxLines(lines: 2)
+                                        .size(context.font.normal)
+                                        .color(context.color.textDefaultColor),
                                   ),
                                   if (showLikeButton ?? true) favButton(context)
                                 ],
                               ),
-                           
+                              Row(
+                                children: [
+                                  Text(
+                                    item.category!.name!.firstUpperCase(),
+                                  )
+                                      .setMaxLines(lines: 2)
+                                      .size(context.font.small)
+                                      .color(context.color.textDefaultColor),
+            if (item.category!.children!.isNotEmpty) ...[
+             Text(
+                                   "/"+ item.category!.children!.first.name!.firstUpperCase(),
+                                  )
+                                      .setMaxLines(lines: 2)
+                                      .size(context.font.small)
+                                      .color(context.color.textDefaultColor),
+            ],
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      color: context.color.secondaryColor,
+                                      child: UiUtils.imageType(
+                                          item.category!.url!,
+                                          fit: BoxFit.cover),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               //SizedBox(height: 5),
                               if (item.address != "")
                                 Row(

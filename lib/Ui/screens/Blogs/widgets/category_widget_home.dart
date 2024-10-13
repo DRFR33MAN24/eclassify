@@ -1,4 +1,3 @@
-
 import 'package:eClassify/Ui/screens/ItemHomeScreen/home_screen.dart';
 import 'package:eClassify/data/cubits/category/blogs/fetch_blog_category_cubit.dart';
 import 'package:eClassify/utils/AppIcon.dart';
@@ -24,47 +23,28 @@ class CategoryWidgetHome extends StatelessWidget {
               padding: const EdgeInsets.only(top: 12),
               child: SizedBox(
                 width: context.screenWidth,
-             
-                child: LayoutBuilder(
-  builder: (context, constraints) {
-    int crossAxisCount = 3; // Number of columns
-    double itemHeight = 70.0; // Height of each item
-    double itemSpacing = 10.0; // Spacing between items
+                height: 103,
 
-    // Limit the number of categories to a maximum of 10
-    int displayCount = state.categories.length > 8 ? 8 : state.categories.length;
-    
-    // Calculate the number of rows
-    int rowCount = (displayCount + 1) ~/ crossAxisCount +1; // +1 for the "moreCategory" widget
-    
-    // Calculate total height: rows * itemHeight + spacing between rows
-    double gridHeight = (rowCount * itemHeight) + ((rowCount - 1) * itemSpacing);
+                child: ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: sidePadding,
+                  ),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    if (index == state.categories.length) {
+                      return moreCategory(context);
+                    } else {
+                      return CategoryHomeCard(
+                        title: state.categories[index].name!,
+                        url: state.categories[index].url!,
+                        onTap: () {
+                             if (state.categories[index].children!.isNotEmpty) {
 
-    return SizedBox(
-      height: gridHeight, // Set the height dynamically
-      child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(), // Disable internal scrolling
-        padding: const EdgeInsets.symmetric(horizontal: sidePadding),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          crossAxisSpacing: itemSpacing,
-          mainAxisSpacing: itemSpacing,
-          childAspectRatio: 1, // Adjust this ratio to fit your design
-        ),
-        itemCount: state.categories.length + 1,
-        itemBuilder: (context, index) {
-          if (index == state.categories.length) {
-            return moreCategory(context);
-          } else {
-            return CategoryHomeCard(
-              title: state.categories[index].name!,
-              url: state.categories[index].url!,
-              onTap: () {
-                if (state.categories[index].children!.isNotEmpty) {
-                  
                   Navigator.pushNamed(
                     context,
-                    Routes.blogsScreenRoute,
+                    Routes.blogsSubCategoryScreen,
                     arguments: {
                       "categoryList": state.categories[index].children,
                       "catName": state.categories[index].name,
@@ -73,7 +53,7 @@ class CategoryWidgetHome extends StatelessWidget {
                     },
                   );
                 } else {
-                  Navigator.pushNamed(
+                  Navigator.pushReplacementNamed(
                     context,
                     Routes.blogsScreenRoute,
                     arguments: {
@@ -83,64 +63,21 @@ class CategoryWidgetHome extends StatelessWidget {
                     },
                   );
                 }
-              },
-            );
-          }
-        },
-      ),
-    );
-  },
-)
-
-,
-                // child: ListView.separated(
-                //   physics: const BouncingScrollPhysics(),
-                //   padding: const EdgeInsets.symmetric(
-                //     horizontal: sidePadding,
-                //   ),
-                //   shrinkWrap: true,
-                //   scrollDirection: Axis.horizontal,
-                //   itemBuilder: (context, index) {
-                //     if (index == state.categories.length) {
-                //       return moreCategory(context);
-                //     } else {
-                //       return CategoryHomeCard(
-                //         title: state.categories[index].name!,
-                //         url: state.categories[index].url!,
-                //         onTap: () {
-
-                //           if (state.categories[index].children!.isNotEmpty) {
-                //             Navigator.pushNamed(
-                //                 context, Routes.subCategoryScreen,
-                //                 arguments: {
-                //                   "categoryList":
-                //                       state.categories[index].children,
-                //                   "catName": state.categories[index].name,
-                //                   "catId": state.categories[index].id,
-                //                   "categoryIds":[state.categories[index].id.toString()]
-                //                 });
-                //           } else {
-                //             Navigator.pushNamed(context, Routes.itemsList,
-                //                 arguments: {
-                //                   'catID':
-                //                       state.categories[index].id.toString(),
-                //                   'catName': state.categories[index].name,
-                //                   "categoryIds":[state.categories[index].id.toString()]
-                //                 });
-                //           }
-                //         },
-                //       );
-                //     }
-                //   },
-                //   itemCount: state.categories.length + 1,
-                //   separatorBuilder: (context, index) {
-                //     return const SizedBox(
-                //       width: 12,
-                //     );
-                //   },
-                // ),
+                        },
+                      );
+                    }
+                  },
+                  itemCount: state.categories.length + 1,
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      width: 12,
+                    );
+                  },
+                ),
+              
               ),
             );
+
           } else {
             return Padding(
               padding: const EdgeInsets.all(50.0),
@@ -157,8 +94,8 @@ class CategoryWidgetHome extends StatelessWidget {
 
   Widget moreCategory(BuildContext context) {
     return SizedBox(
-      width: 60,
-      height: 60,
+      width: 70,
+ 
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, Routes.blogs,
@@ -177,10 +114,9 @@ class CategoryWidgetHome extends StatelessWidget {
             children: [
               Container(
                 clipBehavior: Clip.antiAlias,
-                height: 60,
+                height: 70,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-
                   color: context.color.secondaryColor,
                 ),
                 child: Center(
@@ -200,17 +136,17 @@ class CategoryWidgetHome extends StatelessWidget {
                   ),
                 ),
               ),
-              // Expanded(
-              //     child: Padding(
-              //   padding: const EdgeInsets.all(0.0),
-              //   child:  Text("more".translate(context))
-              //       .centerAlign()
-              //       .setMaxLines(lines: 2)
-              //       .size(context.font.smaller)
-              //       .color(
-              //         context.color.textDefaultColor,
-              //       ),
-              // ))
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child:  Text("more".translate(context))
+                    .centerAlign()
+                    .setMaxLines(lines: 2)
+                    .size(context.font.small)
+                    .color(
+                      context.color.textDefaultColor,
+                    ),
+              ))
             ],
           ),
         ),

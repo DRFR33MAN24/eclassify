@@ -97,6 +97,7 @@ class _CategoryListState extends State<CategoryList>
                                 context,
                                 false,
                                 args: {
+                                  "from":"blogsScreenRoute",
                                   'catId': category.id,
                                   'catName': category.name,
                                   "categoryIds":[category.id.toString()]

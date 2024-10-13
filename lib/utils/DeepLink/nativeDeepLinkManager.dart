@@ -2,6 +2,7 @@ import 'package:eClassify/data/model/item/item_model.dart';
 
 import '../../app/routes.dart';
 import '../../data/Repositories/Item/item_repository.dart';
+import '../../data/Repositories/Service/item_repository.dart' as Service;
 import '../../data/model/data_output.dart';
 import '../helper_utils.dart';
 import '../constant.dart';
@@ -16,11 +17,21 @@ class NativeDeepLinkManager extends NativeDeepLinkUtility {
         Future.delayed(
           Duration.zero,
           () {
-            HelperUtils.goToNextPage(Routes.adDetailsScreen,
+            if (result?.result.type == "item") {
+                          HelperUtils.goToNextPage(Routes.adDetailsScreen,
                 Constant.navigatorKey.currentContext!, false,
                 args: {
                   "model": result?.result as ItemModel,
                 });
+            }
+            else{
+
+            HelperUtils.goToNextPage(Routes.serviceDetailsScreen,
+                Constant.navigatorKey.currentContext!, false,
+                args: {
+                  "model": result?.result as ItemModel,
+                });
+            }
           },
         );
         /* Navigator.pushNamed(Constant.navigatorKey.currentContext!, Routes.adDetailsScreen, arguments: {
@@ -37,6 +48,14 @@ class NativeDeepLinkManager extends NativeDeepLinkUtility {
       int itemId = int.parse(uri.pathSegments[1]);
       DataOutput<ItemModel> dataOutput =
           await ItemRepository().fetchItemFromItemId(itemId);
+
+      return ProcessResult<ItemModel>(dataOutput.modelList.first);
+    }
+
+        if (uri.pathSegments.contains("services-details")) {
+      int itemId = int.parse(uri.pathSegments[1]);
+      DataOutput<ItemModel> dataOutput =
+          await Service.ItemRepository().fetchItemFromItemId(itemId);
 
       return ProcessResult<ItemModel>(dataOutput.modelList.first);
     }

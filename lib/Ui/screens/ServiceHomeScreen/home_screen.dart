@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:eClassify/Ui/screens/ServiceHomeScreen/Widgets/grid_list_adapter.dart';
 import 'package:eClassify/data/cubits/ServiceHome/fetch_home_all_items_cubit.dart';
 import 'package:eClassify/data/cubits/ServiceHome/fetch_home_screen_cubit.dart';
-import 'package:eClassify/data/cubits/ServiceFavorite/favoriteCubit.dart';
+import 'package:eClassify/data/cubits/favorite/favoriteCubit.dart';
 
 import 'package:eClassify/data/model/Home/home_screen_section.dart';
 import 'package:eClassify/utils/hive_utils.dart';
@@ -485,7 +485,7 @@ class AllItemsWidget extends StatelessWidget {
                   type: ListUiType.Mixed,
                   mixMode: true,
                   crossAxisCount: 2,
-                  height: MediaQuery.of(context).size.height / 3.5.rh(context),
+                  height: MediaQuery.of(context).size.height / 3.35.rh(context),
                   builder: (context, int index, bool isGrid) {
                     ItemModel? item = state.items[index];
 

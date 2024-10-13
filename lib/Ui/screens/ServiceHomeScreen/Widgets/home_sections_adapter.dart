@@ -3,14 +3,14 @@ import 'package:eClassify/utils/Extensions/extensions.dart';
 import 'package:eClassify/utils/responsiveSize.dart';
 import 'package:eClassify/utils/ui_utils.dart';
 import 'package:eClassify/data/Repositories/favourites_repository.dart';
-import 'package:eClassify/data/cubits/ServiceFavorite/manageFavCubit.dart';
+import 'package:eClassify/data/cubits/favorite/manageFavCubit.dart';
 import 'package:eClassify/data/model/item/item_model.dart';
 import 'package:eClassify/exports/main_export.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/AppIcon.dart';
 
-import '../../../../data/cubits/ServiceFavorite/favoriteCubit.dart';
+import '../../../../data/cubits/favorite/favoriteCubit.dart';
 import '../../../../data/model/Home/home_screen_section.dart';
 
 import '../../widgets/promoted_widget.dart';
@@ -43,7 +43,7 @@ class HomeSectionsAdapter extends StatelessWidget {
                 ),
                 GridListAdapter(
                   type: ListUiType.List,
-                  height: MediaQuery.of(context).size.height / 3.5.rh(context),
+                  height: MediaQuery.of(context).size.height / 3.35.rh(context),
                   listAxis: Axis.horizontal,
                   listSaperator: (BuildContext p0, int p1) => const SizedBox(
                     width: 14,
@@ -77,7 +77,7 @@ class HomeSectionsAdapter extends StatelessWidget {
                 ),
                 GridListAdapter(
                   type: ListUiType.List,
-                  height: MediaQuery.of(context).size.height / 3.5.rh(context),
+                  height: MediaQuery.of(context).size.height / 3.35.rh(context),
                   listAxis: Axis.horizontal,
                   listSaperator: (BuildContext p0, int p1) => const SizedBox(
                     width: 14,
@@ -112,7 +112,7 @@ class HomeSectionsAdapter extends StatelessWidget {
                 GridListAdapter(
                   type: ListUiType.Grid,
                   crossAxisCount: 2,
-                  height: MediaQuery.of(context).size.height / 3.5.rh(context),
+                  height: MediaQuery.of(context).size.height / 3.35.rh(context),
                   builder: (context, int index, bool) {
                     ItemModel? item = section.sectionData?[index];
 
@@ -142,7 +142,7 @@ class HomeSectionsAdapter extends StatelessWidget {
                 ),
                 GridListAdapter(
                   type: ListUiType.List,
-                  height: MediaQuery.of(context).size.height / 3.5.rh(context),
+                  height: MediaQuery.of(context).size.height / 3.35.rh(context),
                   listAxis: Axis.horizontal,
                   listSaperator: (BuildContext p0, int p1) => const SizedBox(
                     width: 14,
@@ -292,6 +292,41 @@ class _ItemCardState extends State<ItemCard> {
                             .firstUpperCaseWidget()
                             .setMaxLines(lines: 1)
                             .size(context.font.large),
+                            SizedBox(height: 2,),
+                                    Row(
+                                      
+                                children: [
+                                  Text(
+                                    widget.item!.category!.name!.firstUpperCase(),
+                                  )
+                                      .setMaxLines(lines: 2)
+                                      .size(context.font.small)
+                                      .color(context.color.textDefaultColor),
+            if (widget.item!.category!.children!.isNotEmpty) ...[
+             Text(
+                                   "/"+ widget.item!.category!.children!.first.name!.firstUpperCase(),
+                                  )
+                                      .setMaxLines(lines: 2)
+                                      .size(context.font.small)
+                                      .color(context.color.textDefaultColor),
+            ],
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      color: context.color.secondaryColor,
+                                      child: UiUtils.imageType(
+                                          widget.item!.category!.url!,
+                                          fit: BoxFit.cover),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                               SizedBox(height: 2,),
                         if (widget.item?.address != "")
                           Row(
                             children: [

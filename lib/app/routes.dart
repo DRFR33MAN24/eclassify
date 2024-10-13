@@ -32,6 +32,7 @@ import '../Ui/screens/Auth/SignUp/mobile_signup_screen.dart';
 import '../Ui/screens/Auth/SignUp/signup_main_screen.dart';
 import '../Ui/screens/Blogs/blog_details.dart';
 import '../Ui/screens/Blogs/blogs_screen.dart';
+import '../Ui/screens/BlogsSubCategory/BlogsSubCategoryScreen.dart';
 import '../Ui/screens/ItemHomeScreen/Widgets/subCategoryFilterScreen.dart';
 import '../Ui/screens/ItemHomeScreen/category_list.dart' as Item;
 import '../Ui/screens/Blogs/category_list.dart' as Blog;
@@ -67,6 +68,7 @@ import '../Ui/screens/splash_screen.dart';
 import '../Ui/screens/widgets/AnimatedRoutes/blur_page_route.dart';
 import '../Ui/screens/widgets/maintenance_mode.dart';
 import '../data/Repositories/Item/item_repository.dart';
+import '../data/Repositories/Service/item_repository.dart' as Service;
 import '../data/model/data_output.dart';
 import '../data/model/item/item_model.dart';
 
@@ -115,7 +117,7 @@ class Routes {
   static const itemMapScreen = '/ItemMap';
   static const dashboard = '/dashboard';
   static const subCategoryScreen = '/subCategoryScreen';
-   static const ServiceSubCategoryScreen = '/ServiceSubCategoryScreen';
+   static const blogsSubCategoryScreen = '/BlogsSubCategoryScreen';
   static const categoryFilterScreen = '/categoryFilterScreen';
   static const subCategoryFilterScreen = '/subCategoryFilterScreen';
   static const postedSinceFilterScreen = '/postedSinceFilterScreen';
@@ -208,6 +210,37 @@ class Routes {
       });
     }
 
+        if (routeSettings.name!.contains('/services-details/')) {
+      int itemId = int.parse(routeSettings.name!.split('/').last);
+      // Fetch item details based on the itemId
+      return MaterialPageRoute(builder: (context) {
+        return FutureBuilder<DataOutput<ItemModel>>(
+          future: Service.ItemRepository().fetchItemFromItemId(itemId),
+          builder: (context, snapshot) {
+
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              // Return a loading indicator while fetching data
+              return Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            } else if (snapshot.hasError) {
+              // Handle error case
+              return Scaffold(
+                body: Center(
+                  child: Text('Error: ${snapshot.error}'),
+                ),
+              );
+            } else {
+              // Navigate to adDetailsScreen with the fetched item details
+              return ServiceDetailsScreen(model: snapshot.data!.modelList.first);
+            }
+          },
+        );
+      });
+    }
+
     switch (routeSettings.name) {
       case splash:
         return BlurredRouter(builder: ((context) => const SplashScreen()));
@@ -236,6 +269,8 @@ class Routes {
         return Service.CategoryList.route(routeSettings);
       case subCategoryScreen:
         return SubCategoryScreen.route(routeSettings);
+            case blogsSubCategoryScreen:
+        return BlogsSubCategoryScreen.route(routeSettings);
  
       case categoryFilterScreen:
         return CategoryFilterScreen.route(routeSettings);

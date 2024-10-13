@@ -810,6 +810,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               context,
                               Routes.blogsScreenRoute,
                               arguments: {
+                                       "from":"profileSettings",
                                 "catId":-1
                               }
                             );

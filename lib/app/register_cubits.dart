@@ -28,6 +28,7 @@ import '../data/cubits/Location/fetch_areas_cubit.dart';
 import '../data/cubits/Report/item_report_cubit.dart';
 import '../data/cubits/Report/update_report_items_list_cubit.dart';
 import '../data/cubits/auth/authentication_cubit.dart';
+import '../data/cubits/category/blogs/fetch_blog_sub_categories_cubit.dart';
 import '../data/cubits/chatCubits/delete_message_cubit.dart';
 import '../data/cubits/chatCubits/get_buyer_chat_users_cubit.dart';
 import '../data/cubits/chatCubits/get_seller_chat_users_cubit.dart';
@@ -128,6 +129,7 @@ class RegisterCubits {
     BlocProvider(create: (context) => Service.SearchItemCubit()),
     BlocProvider(create: (context) => SearchItemCubit()),
     BlocProvider(create: (context) => FetchSubCategoriesCubit()),
+     BlocProvider(create: (context) => FetchBlogSubCategoriesCubit()),
     BlocProvider(create: (context) => ChangeMyItemStatusCubit()),
     BlocProvider(create: (context) => CreateFeaturedAdCubit()),
     BlocProvider(create: (context) => AssignFreePackageCubit()),

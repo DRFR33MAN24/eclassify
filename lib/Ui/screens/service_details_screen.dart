@@ -8,7 +8,7 @@ import 'package:eClassify/utils/Extensions/extensions.dart';
 import 'package:eClassify/utils/responsiveSize.dart';
 import 'package:eClassify/data/cubits/chatCubits/get_buyer_chat_users_cubit.dart';
 import 'package:eClassify/data/cubits/chatCubits/make_an_offer_item_cubit.dart';
-import 'package:eClassify/data/cubits/ServiceFavorite/favoriteCubit.dart';
+import 'package:eClassify/data/cubits/favorite/favoriteCubit.dart';
 import 'package:eClassify/data/cubits/service/create_featured_ad_cubit.dart';
 import 'package:eClassify/data/cubits/service/fetch_my_item_cubit.dart';
 import 'package:eClassify/data/cubits/item/item_total_click_cubit.dart';
@@ -284,7 +284,7 @@ class ServiceDetailsScreenState extends CloudState<ServiceDetailsScreen> {
                         : 15),
                 child: IconButton(
                   onPressed: () {
-                    HelperUtils.share(context, model.id!);
+                    HelperUtils.share(context, model.id!,model.type!);
                   },
                   icon: Icon(
                     Icons.share,

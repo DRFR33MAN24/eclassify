@@ -7,6 +7,7 @@ import '../../utils/api.dart';
 import '../../utils/ui_utils.dart';
 import '../../app/routes.dart';
 import '../../data/cubits/favorite/favoriteCubit.dart';
+import '../../data/cubits/favorite/favoriteCubit.dart' as Service;
 import '../../data/helper/designs.dart';
 import '../../data/model/item/item_model.dart';
 import 'ItemHomeScreen/Widgets/item_horizontal_card.dart';
@@ -42,6 +43,14 @@ class FavoriteScreenState extends State<FavoriteScreen> {
             context.read<FavoriteCubit>().getMoreFavorite();
           }
         }
+
+
+                if (_controller.offset >= _controller.position.maxScrollExtent) {
+          if (context.read<Service.FavoriteCubit>().hasMoreFavorite()) {
+            setState(() {});
+            context.read<Service.FavoriteCubit>().getMoreFavorite();
+          }
+        }
       },
     );
 
@@ -54,6 +63,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
 
   void getFavorite() async {
     context.read<FavoriteCubit>().getFavorite();
+    context.read<Service.FavoriteCubit>().getFavorite();
   }
 
 /*  void hasMoreFavoriteScrollListener() {

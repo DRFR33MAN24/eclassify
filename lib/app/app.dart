@@ -1,6 +1,7 @@
 
 import 'package:eClassify/Ui/screens/widgets/Errors/something_went_wrong.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +14,7 @@ import 'package:path_provider/path_provider.dart';
 import '../data/model/Personalized/personalized_settings.dart';
 import '../firebase_options.dart';
 import '../main.dart';
+import '../utils/Notification/notification_service.dart';
 import '../utils/hive_keys.dart';
 
 PersonalizedInterestSettings personalizedInterestSettings =
@@ -44,6 +46,8 @@ void initApp() async {
     await Firebase.initializeApp();
   }
 
+  // FirebaseMessaging.onBackgroundMessage(
+  //     NotificationService.onBackgroundMessageHandler);
   MobileAds.instance.initialize();
 
 /*  final NativeAdFactoryExample factoryExample = NativeAdFactoryExample();

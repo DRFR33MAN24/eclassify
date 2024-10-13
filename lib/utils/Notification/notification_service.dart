@@ -62,6 +62,10 @@ class NotificationService {
       var itemOfferPrice = message?.data['item_offer_amount'];
       var userType = message?.data['user_type'];
 
+      if (context!= null) {
+        
+      
+
       if (userType == "Buyer") {
         (context as BuildContext)
             .read<GetBuyerChatListCubit>()
@@ -106,6 +110,8 @@ class NotificationService {
                   profile: userProfile,
                   id: int.parse(senderId)),
             ));
+      }
+
       }
 
       ///Checking if this is user we are chatiing with
@@ -160,7 +166,7 @@ class NotificationService {
   @pragma('vm:entry-point')
   static Future<void> onBackgroundMessageHandler(RemoteMessage message) async {
     await Firebase.initializeApp();
-    handleNotification(message);
+   handleNotification(message);
   }
 
   static forgroundNotificationHandler(BuildContext context) async {
@@ -301,6 +307,7 @@ class NotificationService {
   static Future<void> registerListeners(context) async {
     FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
         alert: true, badge: true, sound: true);
+        await 
     await forgroundNotificationHandler(context);
     await terminatedStateNotificationHandler(context);
     onTapNotificationHandler(context);
